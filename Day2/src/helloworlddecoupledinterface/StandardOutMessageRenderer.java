@@ -1,12 +1,11 @@
 package helloworlddecoupledinterface;
 
-import helloworld.HelloWorldMessageProvider;
 
 /**
  * Created by Oliver Coulson on 12/01/2016.
  */
-public class StandardOutMessageRenderer {
-    private HelloWorldMessageProvider messageProvider = null;
+public class StandardOutMessageRenderer implements MessageRenderer {
+    private MessageProvider messageProvider = null;
 
     public void render() {
         if(messageProvider == null) {
@@ -16,11 +15,11 @@ public class StandardOutMessageRenderer {
         System.out.println(messageProvider.getMessage());
     }
 
-    public void setMessageProvider(HelloWorldMessageProvider provider) {
+    public void setMessageProvider(MessageProvider provider) {
         this.messageProvider = provider;
     }
 
-    public HelloWorldMessageProvider getMessageProvider() {
+    public MessageProvider getMessageProvider() {
         return this.messageProvider;
     }
 }

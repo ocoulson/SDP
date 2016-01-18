@@ -1,9 +1,5 @@
 package helloworlddecoupledinterface;
 
-import helloworld.HelloWorldMessageProvider;
-import helloworld.MessageProvider;
-import helloworld.MessageRenderer;
-import helloworld.StandardOutMessageRenderer;
 
 /**
  * Created by Oliver Coulson on 12/01/2016.
