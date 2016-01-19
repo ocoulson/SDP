@@ -1,5 +1,7 @@
 package HelloWorldGuiceConfig;
 
+import com.google.inject.name.Named;
+
 /**
  * Created by Oliver Coulson on 12/01/2016.
  */

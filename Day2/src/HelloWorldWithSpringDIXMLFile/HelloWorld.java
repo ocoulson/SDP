@@ -17,8 +17,7 @@ public class HelloWorld {
 
     private static BeanFactory getBeanFactory() {
 
-        BeanFactory factory = new ClassPathXmlApplicationContext("~/Documents/IntelliJProjects/MSc/SDP/" +
-                "Day2/src/HelloWorldWithSpringDIXMLFile/beans.xml");
+        BeanFactory factory = new ClassPathXmlApplicationContext("beans.xml");
         return factory;
     }
 }

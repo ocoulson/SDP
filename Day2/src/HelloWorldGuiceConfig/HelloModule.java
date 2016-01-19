@@ -24,6 +24,7 @@ public class HelloModule extends AbstractModule {
         } catch(IOException ex) {
             ex.printStackTrace();
         }
+        System.out.println(props);
 
     }
 }
