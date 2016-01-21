@@ -17,7 +17,14 @@ public class ConcreteCreator implements Creator {
 
         //Uses lazy instantiation - INSTANCE is instantiated when getInstance() is called.
         if (INSTANCE == null) {
-            INSTANCE = new ConcreteCreator();
+
+            synchronized (ConcreteCreator.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new ConcreteCreator();
+                }
+
+            }
+
         }
 
         return INSTANCE;
