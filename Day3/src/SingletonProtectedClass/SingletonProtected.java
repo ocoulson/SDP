@@ -1,17 +1,26 @@
 package SingletonProtectedClass;
 
-import java.io.Serializable;
 
 /**
  * Created by Oliver Coulson on 21/01/2016.
  */
-public class SingletonProtected implements Serializable, Cloneable {
+public class SingletonProtected {
 
-    private SingletonProtected INSTANCE = null;
+    private SingletonProtected INSTANCE = new SingletonProtected();
 
     private SingletonProtected() {
 
+        if (INSTANCE != null) {
+            throw new IllegalStateException("Singleton already exists");
+        }
+
     }
+
+    @Override
+    public SingletonProtected clone() throws CloneNotSupportedException {
+        throw new CloneNotSupportedException();
+    }
+
 
 
 }
