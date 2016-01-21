@@ -16,8 +16,8 @@ public class HelloModule extends AbstractModule {
     @Override
     protected void configure() {
         Properties props = new Properties();
-        try{
-            props.load(new FileReader("./Day2/src/HelloWorldGuiceConfig/guice.properties"));
+        try (FileReader reader = new FileReader("./Day2/src/HelloWorldGuiceConfig/guice.properties")){
+            props.load(reader);
             Names.bindProperties(binder(), props);
         } catch(FileNotFoundException ex) {
             ex.printStackTrace();

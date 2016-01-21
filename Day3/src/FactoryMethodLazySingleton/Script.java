@@ -1,4 +1,4 @@
-package FactoryMethod;
+package FactoryMethodLazySingleton;
 
 /**
  * Created by Oliver Coulson on 19/01/2016.

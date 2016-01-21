@@ -1,13 +1,15 @@
-package FactoryMethod;
+package FactoryMethodEagerSingleton;
 
 /**
  * Created by Oliver Coulson on 19/01/2016.
  */
 public class ConcreteCreator implements Creator{
+
     public static Creator INSTANCE = null;
 
     private ConcreteCreator() {}
 
+    //Uses eager instantiation - INSTANCE is instantiated when class is loaded
     static {
         INSTANCE = new ConcreteCreator();
     }
