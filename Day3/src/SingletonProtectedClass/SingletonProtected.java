@@ -6,7 +6,7 @@ package SingletonProtectedClass;
  */
 public class SingletonProtected {
 
-    private SingletonProtected INSTANCE = new SingletonProtected();
+    private static SingletonProtected INSTANCE = new SingletonProtected();
 
     private SingletonProtected() {
 

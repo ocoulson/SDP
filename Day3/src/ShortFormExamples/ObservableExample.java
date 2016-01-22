@@ -1,6 +1,7 @@
 package ShortFormExamples;
 
 
+
 import java.util.Observable;
 
 /**
@@ -23,6 +24,8 @@ public class ObservableExample extends Observable {
     public String getB() {
         return b;
     }
+
+
     public void setA(int a) {
         this.a = a;
         setChanged();

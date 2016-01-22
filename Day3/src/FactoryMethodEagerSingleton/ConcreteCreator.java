@@ -5,7 +5,7 @@ package FactoryMethodEagerSingleton;
  */
 public class ConcreteCreator implements Creator{
 
-    public static Creator INSTANCE = null;
+    private static Creator INSTANCE = null;
 
     private ConcreteCreator() {}
 
