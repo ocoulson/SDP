@@ -18,6 +18,7 @@ public class ObserverObservableScript {
         observable.addObserver(observer);
 
         observable.setA(3);
+        observable.setB("Goodbye");
 
     }
 }
