@@ -15,7 +15,6 @@ public class CommentaryObject implements Commentary, Subject {
         this.observers = observers;
         desc = "";
     }
-
     @Override
     public void setDesc(String desc) {
         this.desc = desc;
@@ -39,7 +38,6 @@ public class CommentaryObject implements Commentary, Subject {
             o.update(desc);
         }
     }
-
     @Override
     public String subjectDetails() {
         return subjectDetails;
