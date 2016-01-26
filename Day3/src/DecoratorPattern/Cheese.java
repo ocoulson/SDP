@@ -4,8 +4,8 @@ package DecoratorPattern;
  * Created by Oliver Coulson on 25/01/2016.
  */
 public class Cheese extends PizzaDecorator {
-    private static final String desc = "Cheese, (20.72)";
-    private static final double price = 20.72;
+    private final String desc = "Cheese, (20.72)";
+    private final double price = 20.72;
 
     public Cheese(Pizza pizza) {
         super(pizza);
