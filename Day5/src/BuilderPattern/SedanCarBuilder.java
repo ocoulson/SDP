@@ -6,17 +6,6 @@ package BuilderPattern;
 public class SedanCarBuilder implements CarBuilder {
     private Car car;
 
-    public SedanCarBuilder() {
-        car = new Car("Sedan");
-        setBodyStyle();
-        setBreaks();
-        setPower();
-        setEngine();
-        setFuelType();
-        setSeats();
-        setWindows();
-
-    }
     @Override
     public void setBodyStyle() {
         car.setBodyStyle("Sleek Sedan");
