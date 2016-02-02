@@ -15,4 +15,14 @@
 
 2. See package StrategyPattern
 
+3. When is it appropriate to use the Abstract Factory Pattern?
 
+   An Abstract Factory is basically an abstract superclass for a variety of different factories, all creating the same
+   type of object, but in a different way. It decouples the client application from the specific concrete products being
+   created. It allows you to change the concrete implementations of objects in code without changing the code that uses
+   them.
+   This might allow flexibility of code if later changes want to change implementations of objects. Also if different
+   parts of the code want to use different versions of the same type of object. For example buttons on a GUI, different
+   parts of the code might want to use different looking buttons, but performing the same functions.
+
+4. See package AbstractFactoryPattern
