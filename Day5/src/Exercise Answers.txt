@@ -1,0 +1,18 @@
+ Design Patterns 2
+
+1.
+   (a) Briefly describe the Strategy Design Pattern?
+   The Strategy DP allows you to encapsulate methods in a family of classes, so that the parent class doesn't hold
+   the method so that all subclasses have the method whether they need it or not. Instead the parent class has an
+   instance of an interface whose various implementations have different implementations of the code which each
+   subclass can choose.
+
+   (b) When is it appropriate to use the Strategy Design Pattern?
+   With a heirarchy of inheritence when some but not all subclasses need to share a particular implementation of some
+   functionality, and others may want a different implementation of the functionality.
+   To avoid repetition it would want to be in the parent, but that would result in some unneccessary code in some
+   subclasses, or the need to override in many subclasses.
+
+2. See package StrategyPattern
+
+

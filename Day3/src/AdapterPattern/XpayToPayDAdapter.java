@@ -47,6 +47,7 @@ public class XpayToPayDAdapter implements Xpay {
     public String getCardExpYear() {
 //        throw new IllegalAccessException("Card Expiry Year not found in PayD objects");
         return null;
+        //or return ""
     }
 
     @Override
