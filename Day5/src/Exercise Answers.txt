@@ -26,3 +26,17 @@
    parts of the code might want to use different looking buttons, but performing the same functions.
 
 4. See package AbstractFactoryPattern
+
+5. “In general, the details of object construction, such as instantiating and initialising the components that comprise
+    the object, are kept within the object, often as part of its constructor.”
+   Comment on this statement with reference to 'modularity' and 'construction bloat'.
+
+    If you have a large object containing a series of other objects, i.e. a composition relationship, if you had to
+    initialise and instantiate all those parts in the constructor of the main object, the constructor of that main
+    object would end up being potentially huge and require a lot of parameters, specifying what all those interior
+    objects are. Furthermore, that constructor would have to instantiate these components making the class dependent on
+    all the component classes. Using various design patterns, notably the Builder pattern, you can remove this
+    construction bloat and make the main class not dependent on specific concrete classes for its components, instead
+    a builder object has these dependencies and puts the main object together.
+
+6. See package BuilderPattern
