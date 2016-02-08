@@ -1,59 +1,53 @@
 package BuilderPattern;
 
 /**
- * Created by Oliver Coulson on 02/02/2016.
+ * Created by Oliver Coulson on 08/02/2016.
  */
 public class SportsCarBuilder implements CarBuilder {
-    private Car car;
+
+    private Car sports;
 
     public SportsCarBuilder() {
-        car = new Car("Sedan");
-        setBodyStyle();
-        setBreaks();
-        setPower();
-        setEngine();
-        setFuelType();
-        setSeats();
-        setWindows();
-
-    }
-    @Override
-    public void setBodyStyle() {
-        car.setBodyStyle("Sporty-as-f***");
+        this.sports = new Car("Sports");
     }
 
     @Override
-    public void setPower() {
-        car.setPower("500 bhp");
+    public void buildBodyStyle() {
+        sports.setBodyStyle("2 Door, rear engine, spoiler");
     }
 
     @Override
-    public void setEngine() {
-        car.setEngine("V8 Turbo");
+    public void buildPower() {
+        sports.setPower("500 bhp");
     }
 
     @Override
-    public void setBreaks() {
-        car.setBreaks("Sweet Disk Breaks");
+    public void buildEngine() {
+        sports.setEngine("V8");
     }
 
     @Override
-    public void setSeats() {
-        car.setSeats("Racing Bucket Seats");
+    public void buildBreaks() {
+        sports.setBreaks("Sweet Disc Breaks");
     }
 
     @Override
-    public void setWindows() {
-        car.setWindows("Turbo Electric Shatterproof Rolldown");
+    public void buildSeats() {
+        sports.setSeats("Bucket-style racing seats, with racing belts");
     }
 
     @Override
-    public void setFuelType() {
-        car.setFuelType("Anything which was once a dinosaur");
+    public void buildWindows() {
+        sports.setWindows("Tinted all round");
+    }
+
+    @Override
+    public void buildFuelType() {
+        sports.setFuelType("Rocket Fuel");
     }
 
     @Override
     public Car getCar() {
-        return car;
+        return sports;
     }
 }

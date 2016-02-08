@@ -1,48 +1,53 @@
 package BuilderPattern;
 
 /**
- * Created by Oliver Coulson on 02/02/2016.
+ * Created by Oliver Coulson on 08/02/2016.
  */
 public class SedanCarBuilder implements CarBuilder {
-    private Car car;
 
-    @Override
-    public void setBodyStyle() {
-        car.setBodyStyle("Sleek Sedan");
+    private Car sedan;
+
+    public SedanCarBuilder() {
+        this.sedan = new Car("Sedan");
     }
 
     @Override
-    public void setPower() {
-        car.setPower("120 bhp");
+    public void buildBodyStyle() {
+        sedan.setBodyStyle("4 Door Saloon");
     }
 
     @Override
-    public void setEngine() {
-        car.setEngine("1.5 cc");
+    public void buildPower() {
+        sedan.setPower("250 bhp");
     }
 
     @Override
-    public void setBreaks() {
-        car.setBreaks("Standard Break Pads - Rating B");
+    public void buildEngine() {
+        sedan.setEngine("2 litre");
     }
 
     @Override
-    public void setSeats() {
-        car.setSeats("Toasty heated seats");
+    public void buildBreaks() {
+        sedan.setBreaks("Standard breaks");
     }
 
     @Override
-    public void setWindows() {
-        car.setWindows("Deep Blue tinted windows");
+    public void buildSeats() {
+        sedan.setSeats("Leather Upholstered, heated");
     }
 
     @Override
-    public void setFuelType() {
-        car.setFuelType("Unleaded");
+    public void buildWindows() {
+        sedan.setWindows("Electric autodown with child lock");
+    }
+
+    @Override
+    public void buildFuelType() {
+        sedan.setFuelType("Unleaded Petrol");
     }
 
     @Override
     public Car getCar() {
-        return car;
+        return sedan;
     }
 }
