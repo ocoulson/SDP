@@ -40,3 +40,18 @@
     a builder object has these dependencies and puts the main object together.
 
 6. See package BuilderPattern
+
+7a) What is the Facade pattern?
+
+    It is basically a way of making a series of complex behind-the-scenes operations seem to be more simple user
+    friendly operations. For example when a seemingly simple action, like withdrawing cash from an ATM, requires a lot
+    of checks, like checking account status, account balance, pin code, withdrawal limit are all done behind a simple
+    method like withdraw(200).
+
+b) When, and why, would you use the Facade Pattern?
+
+    As often as possible when making user interfaces to hide the complexities of the system and allow the user to use
+    easily and effectively. You can also use it to pull several poorly done APIs together into one well designed and
+    easy to read API or to help prevent dependencies between outside code and code within the library behind the facade.
+
+8. See package FacadePattern.
