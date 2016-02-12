@@ -55,3 +55,5 @@ b) When, and why, would you use the Facade Pattern?
     easy to read API or to help prevent dependencies between outside code and code within the library behind the facade.
 
 8. See package FacadePattern.
+
+9. When should one make use of the Bridge Design Pattern?
