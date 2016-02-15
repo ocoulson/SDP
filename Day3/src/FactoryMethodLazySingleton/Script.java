@@ -5,7 +5,8 @@ package FactoryMethodLazySingleton;
  */
 public class Script {
     public static void main(String[] args) {
-        Product myProduct = ConcreteCreator.getInstance().newProduct("Durrrp", 1);
+        Creator myCreator = ConcreteCreator.getInstance();
+        Product myProduct = myCreator.newProduct("Durrrp", 1);
 
         System.out.println(myProduct);
     }
