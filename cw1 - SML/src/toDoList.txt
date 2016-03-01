@@ -1,11 +1,14 @@
 1) Write Instruction classes for :
     a) addInstruction - Done
-    b) subInstruction
-    c) mulInstruction
-    d) divInstruction
+    b) subInstruction - Done
+    c) mulInstruction - Done
+    d) divInstruction - Done
     e) outInstruction
     f) bnzInstruction
 
 2) Update pattern matching statement in Translator to account for other types of instructions.
 
-3) Replace pattern matching statement with a reflection mechanism to
+3) Replace pattern matching statement with a reflection mechanism
+
+4) Check the recursive problem - related to the bnz instruction - check if there are more instructions, possibly
+involves adding extra code at the end of the instruction classes.
