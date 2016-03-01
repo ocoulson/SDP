@@ -36,9 +36,9 @@ case class CustomColour(r: Int, g: Int, b: Int) extends Colour {
 
 }
 sealed trait Shape {
-  def sides: Int
-  def perimeter: Double
-  def area: Double
+  abstract def sides: Int
+  abstract def perimeter: Double
+  abstract def area: Double
   val colour: Colour
 }
 
@@ -75,7 +75,7 @@ object Draw {
       case _ => str+= "Other"
     }
     val dark:Boolean = shape.colour.isDark()
-    var isDark =""
+    var isDark = ""
     if (dark) isDark = "dark in colour"
     else isDark = "light in colour"
 

@@ -1,0 +1,9 @@
+1) Write Instruction classes for :
+    a) addInstruction - Done
+    b) subInstruction
+    c) mulInstruction
+    d) divInstruction
+    e) outInstruction
+    f) bnzInstruction
+
+2) Update pattern matching statement in Translator to account for other types of instructions.
