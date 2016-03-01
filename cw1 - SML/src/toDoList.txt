@@ -7,3 +7,5 @@
     f) bnzInstruction
 
 2) Update pattern matching statement in Translator to account for other types of instructions.
+
+3) Replace pattern matching statement with a reflection mechanism to

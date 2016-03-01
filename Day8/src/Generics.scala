@@ -7,25 +7,25 @@ import atomicscala.AtomicTest._
 sealed trait LinkedList[+T <: LinkedList[T]] {
   var length: Int
   def size: Int
-  def contains(t: T): Boolean
+  def contains [C >: T] (t: C): Boolean
   def apply(n: Int): Result[T]
 }
 
 case object End extends LinkedList[Nothing] {
   var length = 0
   def size: Int = 0
-  def contains(t: Nothing): Boolean = false
+  def contains[C >: Nothing] (t: C): Boolean = false
   def apply(n: Int): Result[Nothing] = Failure[Nothing]("Fail")
 }
 
-final case class Pair[T](head: T, tail: LinkedList[T]) extends LinkedList[T] {
+final case class Pair[+T <: LinkedList[T]](head: T, tail: LinkedList[T]) extends LinkedList[T] {
   var length = size
 
   def size: Int = {
     if (tail.equals(End)) 1
     else 1 + tail.size
   }
-  def contains(t: T): Boolean = {
+  def contains[C >: T] (t: C): Boolean = {
     if (!head.equals(t) && tail.equals(End)) false
     else if (head.equals(t)) true
     else tail.contains(t)
@@ -43,7 +43,7 @@ final case class Pair[T](head: T, tail: LinkedList[T]) extends LinkedList[T] {
   }
 }
 
-sealed trait Result[A]
+sealed trait Result[+A]
 case class Success[A](result: A) extends Result[A]
 case class Failure[A](reason: String) extends Result[A]
 
