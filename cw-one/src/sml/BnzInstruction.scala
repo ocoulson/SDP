@@ -12,7 +12,7 @@ case class BnzInstruction(label: String, opcode: String, register: Int, nextLabe
   }
 
   override def toString(): String = {
-    super.toString + " If " + register + " is not 0, jump back to line " + nextLabel
+    super.toString + " If " + register + " is not 0, jump back to line " + nextLabel + "\n"
   }
 }
 

@@ -10,7 +10,7 @@ case class OutInstruction(label: String, opcode: String, register: Int) extends 
   }
 
   override def toString(): String = {
-    super.toString + " Print contents of register " + register
+    super.toString + " Print contents of register " + register + "\n"
   }
 }
 
