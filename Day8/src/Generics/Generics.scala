@@ -1,3 +1,5 @@
+package Generics
+
 
 import atomicscala.AtomicTest._
 
