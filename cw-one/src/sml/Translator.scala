@@ -66,20 +66,19 @@ class Translator(fileName: String) {
           if (c != null) {
             val constructor = Class.forName(className).getMethods().find(m => m.getName().equals("apply")).get
             val parameterTypes = constructor.getGenericParameterTypes
-            var args = Array[Object]()
+            var args = Seq[Object]()
             var i = 0
             for (i <- 0 until parameterTypes.length - 1) {
-              var field = fields(i)
-              if (parameterTypes(i).getTypeName == "Int") {
-                field = (fields(i).toInt)
-              }
-
+                if (i != 1) {
+                  args = args.+: (fields(i).asInstanceOf[java.lang.Object])
+                }
             }
             val instance = constructor.invoke(this, args: _*).asInstanceOf[Instruction]
             program = program :+ instance
           } else {
             println("Unknown instruction " + fields(1))
           }
+        }
       }
       new Machine(labels, program)
     }
