@@ -1,7 +1,5 @@
 import atomicscala.src.com.atomicscala.AtomicTest._
 
-import scala.actors.A
-
 // Return type is inferred:
 def inferred(c1: Char, c2: Char, c3: Char) = {
   Vector(c1, c2, c3)

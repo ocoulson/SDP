@@ -9,8 +9,6 @@ package atomicscala.src.com.atomicscala
 
 import java.io.FileWriter
 
-import scala.language.implicitConversions
-
 class AtomicTest[T](val target: T) {
   val errorLog = "_AtomicTestErrors.txt"
 

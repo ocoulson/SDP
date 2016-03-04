@@ -20,37 +20,70 @@ class Translator(fileName: String) {
   /**
     * translate the small program in the file into lab (the labels) and prog (the program)
     */
-  def readAndTranslate(m: Machine): Machine = {
-    val labels = m.labels
-    var program = m.prog
-    import scala.io.Source
-    val lines = Source.fromFile(fileName).getLines
-    for (line <- lines) {
-      val fields = line.split(" ")
-      if (fields.length > 0) {
-        labels.add(fields(0))
-        fields(1) match {
-          case ADD =>
-            program = program :+ AddInstruction(fields(0), fields(2).toInt, fields(3).toInt, fields(4).toInt)
-          case LIN =>
-            program = program :+ LinInstruction(fields(0), fields(2).toInt, fields(3).toInt)
-          case SUB =>
-            program = program :+ SubInstruction(fields(0), fields(2).toInt, fields(3).toInt, fields(4).toInt)
-          case MUL =>
-            program = program :+ MulInstruction(fields(0), fields(2).toInt, fields(3).toInt, fields(4).toInt)
-          case DIV =>
-            program = program :+ DivInstruction(fields(0), fields(2).toInt, fields(3).toInt, fields(4).toInt)
-          case OUT =>
-            program = program :+ OutInstruction(fields(0), fields(2).toInt)
-          case BNZ =>
-            program = program :+ BnzInstruction(fields(0), fields(2).toInt, fields(3))
-          case x =>
-            println(s"Unknown instruction $x")
-        }
+//    def readAndTranslate(m: Machine): Machine = {
+//      val labels = m.labels
+//      var program = m.prog
+//      import scala.io.Source
+//      val lines = Source.fromFile(fileName).getLines
+//      for (line <- lines) {
+//        val fields = line.split(" ")
+//        if (fields.length > 0) {
+//          labels.add(fields(0))
+//          fields(1) match {
+//            case ADD =>
+//              program = program :+ AddInstruction(fields(0), fields(2).toInt, fields(3).toInt, fields(4).toInt)
+//            case LIN =>
+//              program = program :+ LinInstruction(fields(0), fields(2).toInt, fields(3).toInt)
+//            case SUB =>
+//              program = program :+ SubInstruction(fields(0), fields(2).toInt, fields(3).toInt, fields(4).toInt)
+//            case MUL =>
+//              program = program :+ MulInstruction(fields(0), fields(2).toInt, fields(3).toInt, fields(4).toInt)
+//            case DIV =>
+//              program = program :+ DivInstruction(fields(0), fields(2).toInt, fields(3).toInt, fields(4).toInt)
+//            case OUT =>
+//              program = program :+ OutInstruction(fields(0), fields(2).toInt)
+//            case BNZ =>
+//              program = program :+ BnzInstruction(fields(0), fields(2).toInt, fields(3))
+//            case x =>
+//              println(s"Unknown instruction $x")
+//          }
+//        }
+//      }
+//      new Machine(labels, program)
+//    }
+
+    def readAndTranslate(m: Machine): Machine = {
+      val labels = m.labels
+      var program = m.prog
+      import scala.io.Source
+      val lines = Source.fromFile(fileName).getLines
+      for (line <- lines) {
+        val fields: Array[java.lang.String] = line.split(" ")
+        if (fields.length > 0) {
+          labels.add(fields(0))
+          val className = fields(1).charAt(0).toUpper + fields(1).substring(1) + "Instruction"
+          val c = Class.forName(className);
+          if (c != null) {
+            val constructor = Class.forName(className).getMethods().find(m => m.getName().equals("apply")).get
+            val parameterTypes = constructor.getGenericParameterTypes
+            var args = Array[Object]()
+            var i = 0
+            for (i <- 0 until parameterTypes.length - 1) {
+              var field = fields(i)
+              if (parameterTypes(i).getTypeName == "Int") {
+                field = (fields(i).toInt)
+              }
+
+            }
+            val instance = constructor.invoke(this, args: _*).asInstanceOf[Instruction]
+            program = program :+ instance
+          } else {
+            println("Unknown instruction " + fields(1))
+          }
       }
+      new Machine(labels, program)
     }
-    new Machine(labels, program)
-  }
+
 }
 
 object Translator {
