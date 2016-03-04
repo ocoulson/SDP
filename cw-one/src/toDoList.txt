@@ -3,7 +3,7 @@
     b) subInstruction - Done
     c) mulInstruction - Done
     d) divInstruction - Done
-    e) outInstruction
+    e) outInstruction - Done
     f) bnzInstruction
 
 2) Update pattern matching statement in Translator to account for other types of instructions.
