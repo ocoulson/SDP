@@ -8,19 +8,10 @@
 
 2) Update pattern matching statement in Translator to account for other types of instructions. - Done
 
-3) Replace pattern matching statement with a reflection mechanism
+3) Replace pattern matching statement with a reflection mechanism - Done
 
 4) Check the recursive problem - related to the bnz instruction - check if there are more instructions, possibly
 involves adding extra code at the end of the instruction classes.
+Investigate implicits
 
 
-if(i != 1) {
-                if (types(i) == "int") {
-                  args = args.:+(fields(i).toInt)
-                } else {
-                  args = args.:+(fields(i))
-                }
-
-
-                println("completed fields" + i)
-              }
