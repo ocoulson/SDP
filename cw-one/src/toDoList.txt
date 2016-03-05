@@ -14,3 +14,13 @@
 involves adding extra code at the end of the instruction classes.
 
 
+if(i != 1) {
+                if (types(i) == "int") {
+                  args = args.:+(fields(i).toInt)
+                } else {
+                  args = args.:+(fields(i))
+                }
+
+
+                println("completed fields" + i)
+              }

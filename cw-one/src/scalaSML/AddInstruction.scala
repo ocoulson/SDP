@@ -1,4 +1,4 @@
-package sml
+package scalaSML
 
 /**
   * This class ....

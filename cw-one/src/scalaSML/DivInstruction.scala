@@ -1,4 +1,4 @@
-package sml
+package scalaSML
 
 /**
   * Created by Oliver Coulson on 01/03/2016.

@@ -1,9 +1,9 @@
-package sml
+package scalaSML
 
 /**
   * Created by Oliver Coulson on 04/03/2016.
   */
-case class BnzInstruction(label: String, opcode: String, register: Int, nextLabel: String) extends Instruction(label, opcode) {
+class BnzInstruction(label: String, opcode: String, register: Int, nextLabel: String) extends Instruction(label, opcode) {
 
   override def execute(m: Machine): Unit = {
     if (m.regs(register) != 0) {

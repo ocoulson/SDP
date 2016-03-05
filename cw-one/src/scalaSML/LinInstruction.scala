@@ -1,11 +1,11 @@
-package sml
+package scalaSML
 
 /**
   * This class ....
   *
   * @author someone
   */
-case class LinInstruction(label: String, opcode: String, register: Int, value: Int) extends Instruction(label, opcode) {
+class LinInstruction(label: String, opcode: String, register: Int, value: Int) extends Instruction(label, opcode) {
 
   override def execute(m: Machine) =
     m.regs(register) = value
