@@ -14,3 +14,4 @@
         - Reader Monad≤
 
 - Extending the code - 5 spaces, 6 colours etc.
+    - Colour is a sealed trait so can be extended within the file, but not outside - come back to this design decision

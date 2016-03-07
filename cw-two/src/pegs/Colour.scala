@@ -1,7 +1,12 @@
 package pegs
 
 /**
-  * Created by Oliver Coulson on 07/03/2016.
+  * Trait and classes for the colour pegs. Can be extend by adding further classes.
+  *
+  * id field will be set at object construction by the ColourHandler class (working name)
+  * Each colour has an associated name and abbreviated character, determined by the name.
+  *
+  * Created by Oliver Coulson and George Shiangoli on 07/03/2016.
   */
 sealed trait Colour {
   val name: String
