@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="com.softwaremill.macwire:macros_2.11:2.2.2" type="repository">
+    <properties maven-id="com.softwaremill.macwire:macros_2.11:2.2.2" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/softwaremill/macwire/macros_2.11/2.2.2/macros_2.11-2.2.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.11.7/scala-library-2.11.7.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/softwaremill/macwire/util_2.11/2.2.2/util_2.11-2.2.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/softwaremill/common/tagging_2.11/1.0.0/tagging_2.11-1.0.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-reflect/2.11.7/scala-reflect-2.11.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
