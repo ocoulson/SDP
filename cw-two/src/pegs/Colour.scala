@@ -10,7 +10,7 @@ package pegs
   */
 sealed trait Colour {
   val name: String
-  val symbol = name.charAt(0).toUpper
+  lazy val symbol = name.charAt(0).toUpper
 }
 
 class Red(id: String) extends Colour {
@@ -31,6 +31,8 @@ class Yellow(id: String) extends Colour {
 class Blue(id: String) extends Colour {
   override val name: String = "blue"
 }
+
+
 
 
 
