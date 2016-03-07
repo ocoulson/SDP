@@ -1,0 +1,9 @@
+- Class Diagram
+       - List classes
+
+- Investigate DI options
+    - MacWire
+    - Spring
+    - Guice
+
+- Extending the code - 5 spaces, 6 colours etc.
