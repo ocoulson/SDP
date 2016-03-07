@@ -1,7 +1,7 @@
 
 trait Game {
   /**
-    * Run a one or more game sof mastermind, until the player
+    * Run a one or more games of mastermind, until the player
     * quits.
     */
   def runGames

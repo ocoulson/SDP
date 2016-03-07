@@ -1,9 +1,16 @@
 - Class Diagram
        - List classes
 
+-Testing
+    - ScalaTest - Imported
+    - Possibly do some TDD later
+
 - Investigate DI options
     - MacWire
     - Spring
     - Guice
+    - Pure Scala
+        - Cake Pattern
+        - Reader Monad≤
 
 - Extending the code - 5 spaces, 6 colours etc.
