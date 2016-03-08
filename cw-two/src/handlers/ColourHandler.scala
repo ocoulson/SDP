@@ -10,50 +10,48 @@ import pegs._
   */
 class ColourHandler {
 
-  //TODO: Use reflection to get colourpool
-  val path = List("/Users/olliecoulson/Documents/IntelliJProjects/MSc/SDP").map(new File(_))
-  val finder = ClassFinder(path)
-  val classes = finder.getClasses().toIterator
+  private val path = List("/Users/olliecoulson/Documents/IntelliJProjects/MSc/SDP").map(new File(_))
+  private val finder = ClassFinder(path)
+  private val classes = finder.getClasses().toIterator
 
-  val subclasses = ClassFinder.concreteSubclasses("pegs.Colour", classes)
+  private val subclasses = ClassFinder.concreteSubclasses("pegs.Colour", classes)
   val instanceNames: List[String] = subclasses.map(i => i.name).toList
   val rawNames = instanceNames.map(i => i.substring(i.indexOf(".")+1))
-
-//  val redClass = Class.forName(i.name)
-//  val redClassConstructor = redClass.getConstructors()(0)
-//  val param: String = "R1"
-//  val instance = redClassConstructor.newInstance(param)
-//  instance
-
-
-
-  //TODO: Use ColourFactory to build and return colour objects
-
-  val colour = ColourFactory.newColour('R', "1")
 
 
 }
 
 object main extends App{
-  val ch = new ColourHandler
-  //print(ch.colour.toString)
-  //ch.subclasses.foreach(println(_))
-  println(ch.instanceNames.toString())
-  println(ch.rawNames.toString())
+val option = ColourFactory.newColour("Red")
+  if (option != None) {
+    println(option.get.name)
+    println(ColourFactory.ids.head)
+  }
 
 
 }
 
 object ColourFactory {
-  def newColour(symbol: Char, id: String): Colour = {
+  val colourHandler = wire[ColourHandler]
+  var ids = List[String]()
+  def newColour(name: String): Option[Colour] = {
 
-    symbol match {
-      case 'R' =>  wire[Red]
-      case 'Y' =>  wire[Yellow]
-      case 'P' =>  wire[Purple]
-      case 'G' =>  wire[Green]
-      case 'B' =>  wire[Blue]
-      case 'O' =>  wire[Orange]
-    }
+      if(colourHandler.rawNames.contains(name)) {
+        val instanceClass = Class.forName(colourHandler.instanceNames.find(i => i.contains(name)).get)
+        val instanceConstructor = instanceClass.getConstructors()(0)
+        val id: String = generateId(name)
+        val instance = Some(instanceConstructor.newInstance(id).asInstanceOf[Colour])
+        instance
+      } else None
   }
+  def generateId(name:String) : String = {
+    val prefix = name.charAt(0).toUpper
+    val suffix = ids.size
+    val id: String = prefix.toString + suffix.toString
+
+    ids = id :: ids
+
+    id
+  }
+
 }
