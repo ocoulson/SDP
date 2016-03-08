@@ -21,8 +21,8 @@ object main extends App{
 
 }
 class ColourHandler {
-  //TODO: change to avoid use of absolute path
-  private val path = List("/Users/olliecoulson/Documents/IntelliJProjects/MSc/SDP").map(new File(_))
+  private val pathString = ".." + File.separator + "SDP"
+  private val path = List(pathString).map(new File(_))
   private val finder = ClassFinder(path)
   private val classes = finder.getClasses().toIterator
 
@@ -34,6 +34,7 @@ class ColourHandler {
 
 
 object ColourFactory {
+  //TODO: issue of playing mutliple games, should this be a class/not have the ids or wipe ids on game restart
   val colourHandler = wire[ColourHandler]
   var ids = List[String]()
   def newColour(name: String): Option[Colour] = {
