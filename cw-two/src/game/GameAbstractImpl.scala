@@ -1,10 +1,12 @@
+package game
+
 
 
 abstract class GameAbstractImpl extends Game {
   private var showCode: Boolean = false
 
   /**
-    * Create a Game object.
+    * Create a game.Game object.
     *
     * @param easy If easy is true the secret code will be
     *             revealed at all times when playing the game. If easy is
