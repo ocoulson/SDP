@@ -11,18 +11,18 @@ import pegs._
   * Created by Oliver Coulson and George Shiangoli on 07/03/2016.
   */
 
-//TODO: Delete object main after tests have been completed.
 object main extends App{
   val option = ColourFactory.newColour("Red")
   if (option != None) {
     println(option.get.name)
     println(ColourFactory.ids.head)
   }
-}
 
+
+}
 class ColourHandler {
-  //TODO: change to avoid use of absolute path
-  private val path = List("/Users/olliecoulson/Documents/IntelliJProjects/MSc/SDP").map(new File(_))
+  private val pathString = ".." + File.separator + "SDP"
+  private val path = List(pathString).map(new File(_))
   private val finder = ClassFinder(path)
   private val classes = finder.getClasses().toIterator
 
@@ -34,6 +34,7 @@ class ColourHandler {
 
 
 object ColourFactory {
+  //TODO: issue of playing mutliple games, should this be a class/not have the ids or wipe ids on game restart
   val colourHandler = wire[ColourHandler]
   var ids = List[String]()
   def newColour(name: String): Option[Colour] = {
