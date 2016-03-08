@@ -1,28 +1,18 @@
 package handlers
 
 import java.io.File
-import java.lang.Class
 import org.clapper.classutil.ClassFinder
 import com.softwaremill.macwire._
 import pegs._
 /**
-  * Created by Oliver Coulson on 07/03/2016.
+  * A class ColourHandler which is responsible for getting the available colours via reflection
+  * An object ColourFactory which is responsible for instantiating colour objects on request.
+  *
+  * Created by Oliver Coulson and George Shiangoli on 07/03/2016.
   */
-class ColourHandler {
-
-  private val path = List("/Users/olliecoulson/Documents/IntelliJProjects/MSc/SDP").map(new File(_))
-  private val finder = ClassFinder(path)
-  private val classes = finder.getClasses().toIterator
-
-  private val subclasses = ClassFinder.concreteSubclasses("pegs.Colour", classes)
-  val instanceNames: List[String] = subclasses.map(i => i.name).toList
-  val rawNames = instanceNames.map(i => i.substring(i.indexOf(".")+1))
-
-
-}
 
 object main extends App{
-val option = ColourFactory.newColour("Red")
+  val option = ColourFactory.newColour("Red")
   if (option != None) {
     println(option.get.name)
     println(ColourFactory.ids.head)
@@ -30,6 +20,18 @@ val option = ColourFactory.newColour("Red")
 
 
 }
+class ColourHandler {
+  //TODO: change to avoid use of absolute path
+  private val path = List("/Users/olliecoulson/Documents/IntelliJProjects/MSc/SDP").map(new File(_))
+  private val finder = ClassFinder(path)
+  private val classes = finder.getClasses().toIterator
+
+  private val subclasses = ClassFinder.concreteSubclasses("pegs.Colour", classes)
+  val instanceNames: List[String] = subclasses.map(i => i.name).toList
+  val rawNames = instanceNames.map(i => i.substring(i.indexOf(".")+1))
+}
+
+
 
 object ColourFactory {
   val colourHandler = wire[ColourHandler]
