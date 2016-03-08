@@ -12,9 +12,9 @@ sealed trait ResponsePeg {
   val name: String
 }
 
-class Black extends ResponsePeg {
+final class Black extends ResponsePeg {
   override val name: String = "Black"
 }
-class White extends ResponsePeg {
+final class White extends ResponsePeg {
   override val name: String = "White"
 }
