@@ -1,17 +1,18 @@
 <component name="libraryTable">
-  <library name="org.clapper:classutil_2.11:1.0.6" type="repository">
-    <properties maven-id="org.clapper:classutil_2.11:1.0.6" />
+  <library name="org.clapper:classutil_2.11:1.0.5" type="repository">
+    <properties maven-id="org.clapper:classutil_2.11:1.0.5" />
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/clapper/classutil_2.11/1.0.6/classutil_2.11-1.0.6.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.11.7/scala-library-2.11.7.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/clapper/classutil_2.11/1.0.5/classutil_2.11-1.0.5.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.11.0/scala-library-2.11.0.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/ow2/asm/asm/5.0.2/asm-5.0.2.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/ow2/asm/asm-commons/5.0.2/asm-commons-5.0.2.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/ow2/asm/asm-tree/5.0.2/asm-tree-5.0.2.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/ow2/asm/asm-util/5.0.2/asm-util-5.0.2.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/clapper/grizzled-scala_2.11/1.4.0/grizzled-scala_2.11-1.4.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/clapper/grizzled-scala_2.11/1.2/grizzled-scala_2.11-1.2.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/scala-lang/modules/scala-async_2.11/0.9.1/scala-async_2.11-0.9.1.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/jline/jline/2.6/jline-2.6.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/clapper/grizzled-slf4j_2.11/1.0.2/grizzled-slf4j_2.11-1.0.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.7/slf4j-api-1.7.7.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

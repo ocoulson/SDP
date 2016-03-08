@@ -8,29 +8,30 @@ package pegs
   *
   * Created by Oliver Coulson and George Shiangoli on 07/03/2016.
   */
-sealed trait Colour {
+trait Colour {
   val name: String
   lazy val symbol = name.charAt(0).toUpper
 }
 
-class Red(id: String) extends Colour {
+final class Red(id: String) extends Colour {
   override val name: String = "red"
 }
-class Orange(id: String) extends Colour {
+final class Orange(id: String) extends Colour {
   override val name: String = "orange"
 }
-class Purple(id: String) extends Colour {
+final class Purple(id: String) extends Colour {
   override val name: String = "purple"
 }
-class Green(id: String) extends Colour {
+final class Green(id: String) extends Colour {
   override val name: String = "green"
 }
-class Yellow(id: String) extends Colour {
+final class Yellow(id: String) extends Colour {
   override val name: String = "yellow"
 }
-class Blue(id: String) extends Colour {
+final class Blue(id: String) extends Colour {
   override val name: String = "blue"
 }
+
 
 
 
