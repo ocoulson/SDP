@@ -11,15 +11,6 @@ import pegs._
   * Created by Oliver Coulson and George Shiangoli on 07/03/2016.
   */
 
-//TODO: Delete object main after tests have been completed.
-object main extends App{
-  val option = ColourFactory.newColour("Red")
-  if (option != None) {
-    println(option.get.name)
-    println(ColourFactory.ids.head)
-  }
-}
-
 class ColourHandler {
   private val pathString = ".." + File.separator + "SDP"
   private val path = List(pathString).map(new File(_))
