@@ -2,7 +2,6 @@
   * Created by Oliver Coulson on 09/03/2016.
   */
 
-import java.io.File
 
 import handlers.{ColourHandler, ColourFactory}
 import org.clapper.classutil.ClassFinder
