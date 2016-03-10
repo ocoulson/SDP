@@ -4,6 +4,9 @@ import java.io.File
 import org.clapper.classutil.ClassFinder
 import com.softwaremill.macwire._
 import pegs._
+
+import scala.util.Random
+
 /**
   * A class ColourHandler which is responsible for getting the available colours via reflection
   * An object ColourFactory which is responsible for instantiating colour objects on request.
@@ -46,6 +49,13 @@ object ColourFactory {
     ids = id :: ids
 
     id
+  }
+
+  def generateRandomColour(): Option[Colour] = {
+    val colourHandler = wire[ColourHandler]
+    val colours = colourHandler.rawNames
+    val randomised = Random.shuffle(colours)
+    ColourFactory.newColour(randomised.head)
   }
 
 }
