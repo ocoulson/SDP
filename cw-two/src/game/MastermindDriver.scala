@@ -1,4 +1,8 @@
+package game
 
+/**
+  * Created by Oliver Coulson on 10/03/2016.
+  */
 object MastermindDriver {
   def main(args: Array[String]) {
     //TODO: Get user input for easy/hard
