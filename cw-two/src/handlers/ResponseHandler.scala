@@ -1,6 +1,6 @@
 package handlers
 
-import game.{Code, Guess, SecretCode}
+import game.{Response, Code, Guess, SecretCode}
 import pegs.{ResponsePeg, White, Black}
 import com.softwaremill.macwire._
 
@@ -11,8 +11,10 @@ import scala.util.Random
   */
 class ResponseHandler(secretCode: SecretCode) {
 
-  def getResponse(guess: Guess): Vector[ResponsePeg] = {
-    if(Code.isGuessCorrect(guess, secretCode)) guess.code.map(c => ResponseFactory.getResponsePeg(true))
+  def getResponse(guess: Guess): Response = {
+    if(Code.isGuessCorrect(guess, secretCode)) {
+      getResponseInstance(guess.code.map(c => ResponseFactory.getResponsePeg(true)))
+    }
     else {
       val zipped = guess.code.zip(secretCode.code)
       val blacks: Vector[ResponsePeg] = zipped.filter(t => t._1 == t._2).map(t => ResponseFactory.getResponsePeg(true))
@@ -24,8 +26,12 @@ class ResponseHandler(secretCode: SecretCode) {
 
       val whites: Vector[ResponsePeg] = maybe1.intersect(maybe2).map(c => ResponseFactory.getResponsePeg(false))
 
-      Random.shuffle(whites ++ blacks)
+      getResponseInstance(Random.shuffle(whites ++ blacks))
+
     }
+  }
+  private def getResponseInstance(input: Vector[ResponsePeg]): Response = {
+    wire[Response]
   }
 }
 

@@ -1,7 +1,9 @@
 package game
 
-import handlers.{CodeFactory, ColourHandler}
+import handlers.{ResponseHandler, CodeFactory, ColourHandler}
 import com.softwaremill.macwire._
+import pegs.ResponsePeg
+import scala.io.StdIn
 
 /**
   * Created by Oliver Coulson and George Shiangoli on 11/03/2016.
@@ -11,7 +13,7 @@ class GameStatus(showCode: Boolean) extends Game{
   private val NUMBER_OF_GUESSES = 12
 
   private val colourHandler = wire[ColourHandler]
-
+  private val codeFactory = new CodeFactory(CODE_LENGTH)
   private val colourNumber = colourHandler.rawNames.length
 
 
@@ -37,17 +39,42 @@ class GameStatus(showCode: Boolean) extends Game{
             "When entering guesses you only need to enter the first character of the color as a capital letter." +
             "\n\n" +
             s"You have $NUMBER_OF_GUESSES attempts to guess the answer or you lose the game")
-
-    gameLoop()
+    val guesses = Vector[Guess]()
+    val responses = Vector[Response]()
+    val guessResponseVector = guesses.zip(responses)
+    gameLoop(guessResponseVector)
   }
 
-  def gameLoop(): Unit = {
-    val size = CODE_LENGTH
-    val codeFactory = new CodeFactory(size)//wire[CodeFactory]
+  def gameLoop(guessesAndResponses: Vector[(Guess, Response)]): Unit = {
     println("Generating secret code...")
     val secretCode: SecretCode = codeFactory.generateSecretCode
     if (showCode) {
       println("The secret code is " + secretCode.toString())
+    }
+    println(s"You have ${NUMBER_OF_GUESSES - guessesAndResponses.length} guesses left\n")
+    guessLoop(guessesAndResponses, secretCode, false)
+
+
+  }
+
+  def guessLoop(guessesAndResponses: Vector[(Guess, Response)], code: SecretCode, invalidGuess: Boolean): Unit = {
+
+    println("What is your next guess?\nType in the characters for your guess and press Enter.")
+    print("Enter guess: ")
+
+    val input = StdIn.readLine()
+    val guessOption = codeFactory.processGuess(input)
+    guessOption match {
+      case None => guessLoop(guessesAndResponses, code, true)
+      case _ => val guess = guessOption.get
+        val responseHandler: ResponseHandler = wire[ResponseHandler]
+        val response: Response = responseHandler.getResponse(guess)
+        if(showCode) println(s"${code.toString} Secret Code")
+        else println(".... Secret Code")
+        val zipped: Vector[(Guess, Response)] = (Vector[Guess](guess).zip(Vector[Response](response)))
+        val newGuesses: Vector[(Guess, Response)] = guessesAndResponses ++ zipped
+        newGuesses.foreach(g => println)
+
     }
 
   }

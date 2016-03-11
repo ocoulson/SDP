@@ -2,7 +2,7 @@
   * Created by Oliver Coulson on 11/03/2016.
   */
 
-import game.{Guess, SecretCode}
+import game.{Guess, SecretCode, Response}
 import com.softwaremill.macwire._
 import handlers.{ResponseFactory, ResponseHandler, ColourFactory}
 import org.scalatest.FunSuite
@@ -25,11 +25,11 @@ class ResponseHandlerTest extends FunSuite{
                                         ColourFactory.newColour('B').get,
                                         ColourFactory.newColour('R').get))
 
-    val response = responseHandler1.getResponse(correctGuess)
-    val blacks = response.filter(rp => rp.isInstanceOf[Black])
+    val response: Response = responseHandler1.getResponse(correctGuess)
+    val blacks = response.pegs.filter(rp => rp.isInstanceOf[Black])
 
     println(response)
-    assert(response.length == secretCode1.length)
+    assert(response.pegs.length == secretCode1.length)
   }
 
   test("The response of a guess all but one correct and in the correct positions, there should be" +
@@ -40,8 +40,8 @@ class ResponseHandlerTest extends FunSuite{
                                 ColourFactory.newColour('Y').get))
 
     val response = responseHandler1.getResponse(guess)
-    val blacks = response.filter(rp => rp.isInstanceOf[Black])
-    val whites = response.filter(rp => rp.isInstanceOf[White])
+    val blacks = response.pegs.filter(rp => rp.isInstanceOf[Black])
+    val whites = response.pegs.filter(rp => rp.isInstanceOf[White])
     println(response)
     assert(blacks.length == 3)
     assert(whites.isEmpty)
@@ -55,8 +55,8 @@ class ResponseHandlerTest extends FunSuite{
                                 ColourFactory.newColour('B').get))
 
     val response = responseHandler1.getResponse(guess)
-    val blacks = response.filter(rp => rp.isInstanceOf[Black])
-    val whites = response.filter(rp => rp.isInstanceOf[White])
+    val blacks = response.pegs.filter(rp => rp.isInstanceOf[Black])
+    val whites = response.pegs.filter(rp => rp.isInstanceOf[White])
     println(response)
     assert(blacks.length == 2)
     assert(whites.length == 1)
@@ -69,8 +69,8 @@ class ResponseHandlerTest extends FunSuite{
                                 ColourFactory.newColour('O').get))
 
     val response = responseHandler1.getResponse(guess)
-    val blacks = response.filter(rp => rp.isInstanceOf[Black])
-    val whites = response.filter(rp => rp.isInstanceOf[White])
+    val blacks = response.pegs.filter(rp => rp.isInstanceOf[Black])
+    val whites = response.pegs.filter(rp => rp.isInstanceOf[White])
     println(response)
     assert(blacks.length == 2)
     assert(whites.isEmpty)
@@ -83,8 +83,8 @@ class ResponseHandlerTest extends FunSuite{
                                 ColourFactory.newColour('B').get))
 
     val response = responseHandler1.getResponse(guess)
-    val blacks = response.filter(rp => rp.isInstanceOf[Black])
-    val whites = response.filter(rp => rp.isInstanceOf[White])
+    val blacks = response.pegs.filter(rp => rp.isInstanceOf[Black])
+    val whites = response.pegs.filter(rp => rp.isInstanceOf[White])
     println(response)
     assert(blacks.length == 2)
     assert(whites.length == 2)
@@ -97,8 +97,8 @@ class ResponseHandlerTest extends FunSuite{
                                 ColourFactory.newColour('O').get))
 
     val response = responseHandler1.getResponse(guess)
-    val blacks = response.filter(rp => rp.isInstanceOf[Black])
-    val whites = response.filter(rp => rp.isInstanceOf[White])
+    val blacks = response.pegs.filter(rp => rp.isInstanceOf[Black])
+    val whites = response.pegs.filter(rp => rp.isInstanceOf[White])
     println(response)
     assert(blacks.length == 1)
     assert(whites.length == 2)
@@ -111,8 +111,8 @@ class ResponseHandlerTest extends FunSuite{
       ColourFactory.newColour('R').get))
 
     val response = responseHandler1.getResponse(guess)
-    val blacks = response.filter(rp => rp.isInstanceOf[Black])
-    val whites = response.filter(rp => rp.isInstanceOf[White])
+    val blacks = response.pegs.filter(rp => rp.isInstanceOf[Black])
+    val whites = response.pegs.filter(rp => rp.isInstanceOf[White])
     println(response)
     assert(blacks.length == 1)
     assert(whites.length == 1)
@@ -124,8 +124,8 @@ class ResponseHandlerTest extends FunSuite{
                                 ColourFactory.newColour('B').get))
 
     val response = responseHandler1.getResponse(guess)
-    val blacks = response.filter(rp => rp.isInstanceOf[Black])
-    val whites = response.filter(rp => rp.isInstanceOf[White])
+    val blacks = response.pegs.filter(rp => rp.isInstanceOf[Black])
+    val whites = response.pegs.filter(rp => rp.isInstanceOf[White])
     println(response)
     assert(blacks.isEmpty)
     assert(whites.length == 4)
@@ -137,8 +137,8 @@ class ResponseHandlerTest extends FunSuite{
                                 ColourFactory.newColour('O').get))
 
     val response = responseHandler1.getResponse(guess)
-    val blacks = response.filter(rp => rp.isInstanceOf[Black])
-    val whites = response.filter(rp => rp.isInstanceOf[White])
+    val blacks = response.pegs.filter(rp => rp.isInstanceOf[Black])
+    val whites = response.pegs.filter(rp => rp.isInstanceOf[White])
     println(response)
     assert(blacks.isEmpty)
     assert(whites.isEmpty)
@@ -150,8 +150,8 @@ class ResponseHandlerTest extends FunSuite{
                                 ColourFactory.newColour('Y').get))
 
     val response = responseHandler1.getResponse(guess)
-    val blacks = response.filter(rp => rp.isInstanceOf[Black])
-    val whites = response.filter(rp => rp.isInstanceOf[White])
+    val blacks = response.pegs.filter(rp => rp.isInstanceOf[Black])
+    val whites = response.pegs.filter(rp => rp.isInstanceOf[White])
     println(response)
     assert(blacks.isEmpty)
     assert(whites.length == 1)
@@ -167,10 +167,10 @@ class ResponseHandlerTest extends FunSuite{
                                         ColourFactory.newColour('P').get))
 
     val response = responseHandler2.getResponse(correctGuess)
-    val blacks = response.filter(rp => rp.isInstanceOf[Black])
+    val blacks = response.pegs.filter(rp => rp.isInstanceOf[Black])
 
     println(response)
-    assert(response.length == secretCode2.length)
+    assert(response.pegs.length == secretCode2.length)
   }
 
   test("The response of no correct guess should be no pegs") {
@@ -182,8 +182,8 @@ class ResponseHandlerTest extends FunSuite{
                                           ColourFactory.newColour('Y').get))
 
     val response = responseHandler2.getResponse(incorrectGuess)
-    val blacks = response.filter(rp => rp.isInstanceOf[Black])
-    val whites = response.filter(rp => rp.isInstanceOf[White])
+    val blacks = response.pegs.filter(rp => rp.isInstanceOf[Black])
+    val whites = response.pegs.filter(rp => rp.isInstanceOf[White])
 
     println(response)
     assert(blacks.isEmpty)
@@ -199,7 +199,7 @@ class ResponseHandlerTest extends FunSuite{
       ColourFactory.newColour('P').get))
 
     val response = responseHandler2.getResponse(incorrectGuess)
-    val blacks = response.filter(rp => rp.isInstanceOf[Black])
+    val blacks = response.pegs.filter(rp => rp.isInstanceOf[Black])
 
     println(response)
     assert(blacks.length == 5)
@@ -214,8 +214,8 @@ class ResponseHandlerTest extends FunSuite{
       ColourFactory.newColour('Y').get))
 
     val response = responseHandler2.getResponse(incorrectGuess)
-    val blacks = response.filter(rp => rp.isInstanceOf[Black])
-    val whites = response.filter(rp => rp.isInstanceOf[White])
+    val blacks = response.pegs.filter(rp => rp.isInstanceOf[Black])
+    val whites = response.pegs.filter(rp => rp.isInstanceOf[White])
 
     println(response)
     assert(blacks.length == 4)
@@ -231,8 +231,8 @@ class ResponseHandlerTest extends FunSuite{
       ColourFactory.newColour('O').get))
 
     val response = responseHandler2.getResponse(incorrectGuess)
-    val blacks = response.filter(rp => rp.isInstanceOf[Black])
-    val whites = response.filter(rp => rp.isInstanceOf[White])
+    val blacks = response.pegs.filter(rp => rp.isInstanceOf[Black])
+    val whites = response.pegs.filter(rp => rp.isInstanceOf[White])
 
     println(response)
     assert(blacks.isEmpty)
@@ -248,8 +248,8 @@ class ResponseHandlerTest extends FunSuite{
       ColourFactory.newColour('G').get))
 
     val response = responseHandler2.getResponse(incorrectGuess)
-    val blacks = response.filter(rp => rp.isInstanceOf[Black])
-    val whites = response.filter(rp => rp.isInstanceOf[White])
+    val blacks = response.pegs.filter(rp => rp.isInstanceOf[Black])
+    val whites = response.pegs.filter(rp => rp.isInstanceOf[White])
 
     println(response)
     assert(blacks.length == 3)
