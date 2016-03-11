@@ -23,6 +23,11 @@ class ColourHandler {
   private val subclasses = ClassFinder.concreteSubclasses("pegs.Colour", classes)
   val instanceNames: List[String] = subclasses.map(i => i.name).toList
   val rawNames = instanceNames.map(i => i.substring(i.indexOf(".")+1))
+
+  override def toString(): String = {
+    val rawString = rawNames.toString()
+    rawString.substring(rawString.indexOf('(')+1, rawString.indexOf(')'))
+  }
 }
 
 
