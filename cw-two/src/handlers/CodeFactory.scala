@@ -22,13 +22,14 @@ class CodeFactory(pegNo: Int) {
     }
     code
   }
-//  def processGuess(guess: String): Option[Guess] = {
-//    if (guess.length != pegNo) return None
-//    else {
-//      val colourHandler = wire[ColourHandler]
-//      val symbols = colourHandler.rawNames.map(_.charAt(0).toUpper)
-//      guess.foreach(s => if(!symbols.contains(s)) return None)
-//      val colourVector: Vector[Colour] = guess.map(c => )
-//    }
-//  }
+  def processGuess(guess: String): Option[Guess] = {
+    if (guess.length != pegNo) return None
+    else {
+      val colourHandler = wire[ColourHandler]
+      val symbols = colourHandler.rawNames.map(_.charAt(0).toUpper)
+      guess.foreach(s => if(!symbols.contains(s)) return None)
+      val colourVector: Vector[Colour] = guess.map(c => ColourFactory.newColour(c).get).toVector
+      Some(wire[Guess])
+    }
+  }
 }
