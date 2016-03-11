@@ -1,6 +1,7 @@
 package game
 
 import pegs.Colour
+import com.softwaremill.macwire._
 
 /**
   * Created by Oliver Coulson on 10/03/2016.
@@ -30,8 +31,8 @@ object Code {
   }
   def isSameGuess(code1: Guess, code2: Guess): Boolean = {
     val guess2Vector = code2.code
-    //TODO: use code factory
-    val secretCode = new SecretCode(guess2Vector)
+    //Method isGuessCorrect uses SecretCode, so new guess converted to SecretCode to avoid duplication.
+    val secretCode = wire[SecretCode]
     isGuessCorrect(code1, secretCode)
   }
 }
