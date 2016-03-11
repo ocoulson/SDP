@@ -31,7 +31,7 @@ class Translator(fileName: String) {
         if (fields.length > 0) {
           labels.add(fields(0))
           val className = "scalaSML." + fields(1).charAt(0).toUpper + fields(1).substring(1) + "Instruction"
-          val c = Class.forName(className);
+          val c = Class.forName(className)
           if (c != null) {
             val apply = Class.forName(className).getMethods().find(m => m.getName().equals("apply")).get
             val types = apply.getParameterTypes
@@ -39,7 +39,7 @@ class Translator(fileName: String) {
               println(types(i))
             }
             var args = Seq[Any]()
-            for (i <- 0 until fields.length) {
+            for (i <- fields.indices) {
 
                 if (i == 0) {
                   args = args.:+ (fields(i))
