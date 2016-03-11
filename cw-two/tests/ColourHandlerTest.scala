@@ -15,21 +15,17 @@ class ColourHandlerTest extends FunSuite {
 
   //ColourFactory Tests
   test("Colour factory returns an object in an Option when given a valid string") {
-    val option = ColourFactory.newColour("Red")
+    val option = ColourFactory.newColour('R')
     assert(option.isInstanceOf[Option[Colour]])
   }
   test("The option from ColourFactory contains a Colour of the type specified") {
-    val option = ColourFactory.newColour("Red")
+    val option = ColourFactory.newColour('R')
     val redColour = option.get
     assert(redColour.isInstanceOf[Colour])
     assert(redColour.isInstanceOf[Red])
   }
   test("Colour factory returns an Option which is None when given an invalid string") {
-    val option = ColourFactory.newColour("red")//should have upper case first letter
-    assert(option.isEmpty)
-  }
-  test("Colour factory returns an Option which is None when given an empty string") {
-    val option = ColourFactory.newColour("")//should have upper case first letter
+    val option = ColourFactory.newColour('r')//should have upper case first letter
     assert(option.isEmpty)
   }
 

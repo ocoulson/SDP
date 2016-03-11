@@ -23,7 +23,7 @@ object Code {
     else {
         val zipped = code1.code.zip(code2.code)
         for(i <- zipped.indices) {
-          if(zipped(i)._1.name != zipped(i)._2.name) return false
+          if(zipped(i)._1.symbol != zipped(i)._2.symbol) return false
         }
         true
     }

@@ -3,21 +3,26 @@ import org.scalatest.FunSuite
 import pegs.Colour
 
 /**
-  * Created by Oliver Coulson on 10/03/2016.
+  * Created by Oliver Coulson and George Shiangoli on 10/03/2016.
   */
-class CodeHandlerTest extends FunSuite{
+
+class CodeFactoryTest extends FunSuite{
+
+  val codeFactory4 = new CodeFactory(4)
+  val codeFactory8 = new CodeFactory(8)
+
   test("A generated secretCode should be a given length") {
     var length = 4
-    val secretCode = CodeFactory.generateSecretCode(length)
+    val secretCode = codeFactory4.generateSecretCode
     assert(secretCode.length == length)
 
     length = 8
-    val secretCode2 = CodeFactory.generateSecretCode(length)
+    val secretCode2 = codeFactory8.generateSecretCode
     assert(secretCode2.length == length)
   }
 
   test("A SecretCode contains a vector of colours") {
-    val secretCode = CodeFactory.generateSecretCode(4)
+    val secretCode = codeFactory4.generateSecretCode
     val vector = secretCode.code
     assert(vector(0).isInstanceOf[Colour])
     assert(vector(1).isInstanceOf[Colour])
@@ -26,9 +31,12 @@ class CodeHandlerTest extends FunSuite{
   }
 
   test("A SecretCode should be different from other SecretCodes") {
-    val A = CodeFactory.generateSecretCode(4).code
-    val B = CodeFactory.generateSecretCode(4).code
-    val C = CodeFactory.generateSecretCode(4).code
+    val A = codeFactory4.generateSecretCode.code
+    val B = codeFactory4.generateSecretCode.code
+    val C = codeFactory4.generateSecretCode.code
+    println(A)
+    println(B)
+    println(C)
 
     val AB = A.zip(B)
     val AC = A.zip(C)

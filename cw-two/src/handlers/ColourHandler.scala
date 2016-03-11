@@ -31,9 +31,9 @@ object ColourFactory {
   //TODO: issue of playing mutliple games, should this be a class/not have the ids or wipe ids on game restart
   val colourHandler = wire[ColourHandler]
   var ids = List[String]()
-  def newColour(name: String): Option[Colour] = {
+  def newColour(name: Char): Option[Colour] = {
 
-      if(colourHandler.rawNames.contains(name)) {
+      if(colourHandler.rawNames.map(_.charAt(0).toUpper).contains(name)) {
         val instanceClass = Class.forName(colourHandler.instanceNames.find(i => i.contains(name)).get)
         val instanceConstructor = instanceClass.getConstructors()(0)
         val id: String = generateId(name)
@@ -41,10 +41,10 @@ object ColourFactory {
         instance
       } else None
   }
-  def generateId(name:String) : String = {
-    val prefix = name.charAt(0).toUpper
+  def generateId(name:Char) : String = {
+
     val suffix = ids.size
-    val id: String = prefix.toString + suffix.toString
+    val id: String = name.toString + suffix.toString
 
     ids = id :: ids
 
@@ -55,7 +55,7 @@ object ColourFactory {
     val colourHandler = wire[ColourHandler]
     val colours = colourHandler.rawNames
     val randomised = Random.shuffle(colours)
-    ColourFactory.newColour(randomised.head)
+    ColourFactory.newColour(randomised.head.charAt(0).toUpper)
   }
 
 }

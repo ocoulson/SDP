@@ -9,8 +9,7 @@ package pegs
   * Created by Oliver Coulson and George Shiangoli on 07/03/2016.
   */
 trait Colour {
-  val name: String
-  lazy val symbol = name.charAt(0).toUpper
+  val symbol: Char
 
   override def equals(other: Any): Boolean = {
     if (!other.isInstanceOf[Colour]) false
@@ -23,22 +22,22 @@ trait Colour {
 }
 
 final class Red(id: String) extends Colour {
-  override val name: String = "red"
+  override val symbol: Char = 'R'
 }
 final class Orange(id: String) extends Colour {
-  override val name: String = "orange"
+  override val symbol: Char = 'O'
 }
 final class Purple(id: String) extends Colour {
-  override val name: String = "purple"
+  override val symbol: Char = 'P'
 }
 final class Green(id: String) extends Colour {
-  override val name: String = "green"
+  override val symbol: Char = 'G'
 }
 final class Yellow(id: String) extends Colour {
-  override val name: String = "yellow"
+  override val symbol: Char = 'Y'
 }
 final class Blue(id: String) extends Colour {
-  override val name: String = "blue"
+  override val symbol: Char = 'B'
 }
 
 
