@@ -12,10 +12,24 @@ sealed trait Code {
 
 final class Guess(val code: Vector[Colour]) extends Code {
   override def length = code.length
+  override def toString(): String = {
+    val builder = new StringBuilder
+    val rawString = code.map(c => c.symbol).toString()
+    val substring = rawString.substring(rawString.indexOf('(') + 1, rawString.indexOf(')'))
+    substring.foreach(c => if(c != ',' && c != ' ') builder.append(c))
+    builder.toString()
+  }
 }
 
 final class SecretCode(val code: Vector[Colour]) extends Code {
   override def length = code.length
+  override def toString(): String = {
+    val builder = new StringBuilder
+    val rawString = code.map(c => c.symbol).toString()
+    val substring = rawString.substring(rawString.indexOf('(') + 1, rawString.indexOf(')'))
+    substring.foreach(c => if(c != ',' && c != ' ') builder.append(c))
+    builder.toString()
+  }
 }
 
 object Code {

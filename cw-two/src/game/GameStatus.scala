@@ -1,30 +1,19 @@
 package game
 
-import handlers.ColourHandler
+import handlers.{CodeFactory, ColourHandler}
 import com.softwaremill.macwire._
 
 /**
   * Created by Oliver Coulson and George Shiangoli on 11/03/2016.
   */
-class GameStatus extends Game{
-  private var showCode: Boolean = false
-  private val codeLength: Int = 4
-  private val colourHandler = wire[ColourHandler]
-  private val colourNumber = colourHandler.rawNames.length
-  private val numberOfGuesses = 12
+class GameStatus(showCode: Boolean) extends Game{
+  private val CODE_LENGTH: Int = 4
+  private val NUMBER_OF_GUESSES = 12
 
-  /**
-    * Create a game.Game object.
-    *
-    * @param easy If easy is true the secret code will be
-    *             revealed at all times when playing the game. If easy is
-    *             false the secret code is not revealed until correctly guessed
-    *             or the player runs out of turns.
-    */
-  def this(easy: Boolean) {
-    this()
-    showCode = easy
-  }
+  private val colourHandler = wire[ColourHandler]
+
+  private val colourNumber = colourHandler.rawNames.length
+
 
   /**
     * Run one or more games of mastermind, until the player
@@ -34,7 +23,7 @@ class GameStatus extends Game{
     println("Welcome to Mastermind\n\n" +
             "This is a text version of the classic board game Mastermind.\n" +
             "The computer will think of a secret code.\n" +
-            s"The code consists of $codeLength colored pegs.\n" +
+            s"The code consists of $CODE_LENGTH colored pegs.\n" +
             s"The pegs may be one of $colourNumber colors: ${colourHandler.toString()}.\n" +
             "A color may appear more than once in the code." +
             "\n\n" +
@@ -47,6 +36,20 @@ class GameStatus extends Game{
             "Only the first letter of the color is displayed. B for Blue, R for Red, and so forth.\n" +
             "When entering guesses you only need to enter the first character of the color as a capital letter." +
             "\n\n" +
-            s"You have $numberOfGuesses attempts to guess the answer or you lose the game")
+            s"You have $NUMBER_OF_GUESSES attempts to guess the answer or you lose the game")
+
+    gameLoop()
+  }
+
+  def gameLoop(): Unit = {
+    val size = CODE_LENGTH
+    val codeFactory = new CodeFactory(size)//wire[CodeFactory]
+    println("Generating secret code...")
+    val secretCode: SecretCode = codeFactory.generateSecretCode
+    if (showCode) {
+      println("The secret code is " + secretCode.toString())
+    }
+
   }
 }
+
