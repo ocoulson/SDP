@@ -25,5 +25,25 @@ class CodeHandlerTest extends FunSuite{
     assert(vector(3).isInstanceOf[Colour])
   }
 
+  test("A SecretCode should be different from other SecretCodes") {
+    val A = CodeFactory.generateSecretCode(4).code
+    val B = CodeFactory.generateSecretCode(4).code
+    val C = CodeFactory.generateSecretCode(4).code
+
+    val AB = A.zip(B)
+    val AC = A.zip(C)
+    val BC = B.zip(C)
+
+    var ABequal: Boolean = true
+    var ACequal: Boolean = true
+    var BCequal: Boolean = true
+
+    AB.foreach(tuple => if(!tuple._1.equals(tuple._2)) ABequal = false)
+    AC.foreach(tuple => if(!tuple._1.equals(tuple._2)) ACequal = false)
+    BC.foreach(tuple => if(!tuple._1.equals(tuple._2)) BCequal = false)
+
+    assert(!ABequal && !ACequal && !BCequal)
+
+  }
 
 }

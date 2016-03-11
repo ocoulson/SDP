@@ -11,6 +11,15 @@ package pegs
 trait Colour {
   val name: String
   lazy val symbol = name.charAt(0).toUpper
+
+  override def equals(other: Any): Boolean = {
+    if (!other.isInstanceOf[Colour]) false
+    else {
+      val otherColour = other.asInstanceOf[Colour]
+      if (symbol.equals(otherColour.symbol)) true
+      else false
+    }
+  }
 }
 
 final class Red(id: String) extends Colour {
