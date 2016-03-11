@@ -4,7 +4,7 @@
 
 import game.{Guess, SecretCode}
 import com.softwaremill.macwire._
-import handlers.{ResponseHandler, ColourFactory}
+import handlers.{ResponseFactory, ResponseHandler, ColourFactory}
 import org.scalatest.FunSuite
 import pegs.{White, Black}
 
@@ -254,5 +254,15 @@ class ResponseHandlerTest extends FunSuite{
     println(response)
     assert(blacks.length == 3)
     assert(whites.length == 3)
+  }
+
+  //Testing for getResponsePeg
+
+  test("Test that passing in true produces a black response peg") {
+    assert(ResponseFactory.getResponsePeg(true).isInstanceOf[Black])
+  }
+
+  test("Test that passing in false produces a white response peg") {
+    assert(ResponseFactory.getResponsePeg(false).isInstanceOf[White])
   }
 }
