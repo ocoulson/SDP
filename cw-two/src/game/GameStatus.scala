@@ -63,6 +63,7 @@ class GameStatus(showCode: Boolean) extends Game{
     print("Enter guess: ")
 
     val input = StdIn.readLine()
+    println()
     val guessOption = codeFactory.processGuess(input)
     guessOption match {
       case None => guessLoop(guessesAndResponses, code, true)
@@ -73,7 +74,11 @@ class GameStatus(showCode: Boolean) extends Game{
         else println(".... Secret Code")
         val zipped: Vector[(Guess, Response)] = (Vector[Guess](guess).zip(Vector[Response](response)))
         val newGuesses: Vector[(Guess, Response)] = guessesAndResponses ++ zipped
-        newGuesses.foreach(g => println)
+        newGuesses.foreach(g => println(g._1.toString + " Result: " + g._2.toString))
+        val remainingGuesses = NUMBER_OF_GUESSES - newGuesses.length
+        for (i <- 0 until remainingGuesses) {
+          println("....")
+        }
 
     }
 
