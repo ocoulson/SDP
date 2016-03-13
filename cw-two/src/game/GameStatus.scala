@@ -54,11 +54,11 @@ class GameStatus(showCode: Boolean) extends Game{
     println(s"You have ${NUMBER_OF_GUESSES - guessesAndResponses.length} guesses left\n")
     guessLoop(guessesAndResponses, secretCode, false)
 
-
+    //TODO: Add user check for a new game.
   }
 
   def guessLoop(guessesAndResponses: Vector[(Guess, Response)], code: SecretCode, invalidGuess: Boolean): Unit = {
-
+    //TODO: END Condition (i.e. win or run out of guesses)
     println("What is your next guess?\nType in the characters for your guess and press Enter.")
     print("Enter guess: ")
 
@@ -66,10 +66,12 @@ class GameStatus(showCode: Boolean) extends Game{
     println()
     val guessOption = codeFactory.processGuess(input)
     guessOption match {
+        //TODO: Check whether the boolean flag is necessary
       case None => guessLoop(guessesAndResponses, code, true)
       case _ => val guess = guessOption.get
         val responseHandler: ResponseHandler = wire[ResponseHandler]
         val response: Response = responseHandler.getResponse(guess)
+        //TODO: Check the response is not the appropriate number of blacks
         if(showCode) println(s"${code.toString} Secret Code")
         else println(".... Secret Code")
         val zipped: Vector[(Guess, Response)] = (Vector[Guess](guess).zip(Vector[Response](response)))
@@ -79,7 +81,7 @@ class GameStatus(showCode: Boolean) extends Game{
         for (i <- 0 until remainingGuesses) {
           println("....")
         }
-
+        //TODO: Complete the guessloop, passing the new guess/response vector and the code in
     }
 
   }
