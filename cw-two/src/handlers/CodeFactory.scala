@@ -8,7 +8,7 @@ import pegs.Colour
   * Created by Oliver Coulson on 10/03/2016.
   */
 class CodeFactory(pegNo: Int) {
-
+  //TODO: Refactor to use a recursive method instead of the var
   def generateSecretCode: SecretCode = {
     val finalCode: Vector[Colour] = buildRandomVector
     val secretCode = wire[SecretCode]
