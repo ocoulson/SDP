@@ -2,7 +2,7 @@ package game
 
 import handlers.{ResponseHandler, CodeFactory, ColourHandler}
 import com.softwaremill.macwire._
-import pegs.ResponsePeg
+import pegs.Black
 import scala.io.StdIn
 
 /**
@@ -11,7 +11,7 @@ import scala.io.StdIn
 class GameStatus(showCode: Boolean) extends Game{
   private val CODE_LENGTH: Int = 4
   private val NUMBER_OF_GUESSES = 12
-
+  private val EMPTY_GUESS_RESPONSE_VECTOR = Vector[Guess]().zip(Vector[Response]())
   private val colourHandler = wire[ColourHandler]
   private val codeFactory = new CodeFactory(CODE_LENGTH)
   private val colourNumber = colourHandler.rawNames.length
@@ -39,26 +39,29 @@ class GameStatus(showCode: Boolean) extends Game{
             "When entering guesses you only need to enter the first character of the color as a capital letter." +
             "\n\n" +
             s"You have $NUMBER_OF_GUESSES attempts to guess the answer or you lose the game")
-    val guesses = Vector[Guess]()
-    val responses = Vector[Response]()
-    val guessResponseVector = guesses.zip(responses)
-    gameLoop(guessResponseVector)
+
+    gameLoop()
   }
 
-  def gameLoop(guessesAndResponses: Vector[(Guess, Response)]): Unit = {
+  def gameLoop(): Unit = {
     println("Generating secret code...")
     val secretCode: SecretCode = codeFactory.generateSecretCode
     if (showCode) {
       println("The secret code is " + secretCode.toString())
     }
-    println(s"You have ${NUMBER_OF_GUESSES - guessesAndResponses.length} guesses left\n")
-    guessLoop(guessesAndResponses, secretCode, false)
+    guessLoop(EMPTY_GUESS_RESPONSE_VECTOR, secretCode)
 
-    //TODO: Add user check for a new game.
+    println("Enter Y to play again or anything else to quit")
+    print(":>")
+    val input = StdIn.readLine().toUpperCase
+    input match {
+      case "Y" => gameLoop()
+      case _ => System.exit(0)
+    }
   }
 
-  def guessLoop(guessesAndResponses: Vector[(Guess, Response)], code: SecretCode, invalidGuess: Boolean): Unit = {
-    //TODO: END Condition (i.e. win or run out of guesses)
+  def guessLoop(guessesAndResponses: Vector[(Guess, Response)], code: SecretCode): Unit = {
+    println(s"You have ${NUMBER_OF_GUESSES - guessesAndResponses.length} guesses left\n")
     println("What is your next guess?\nType in the characters for your guess and press Enter.")
     print("Enter guess: ")
 
@@ -66,22 +69,28 @@ class GameStatus(showCode: Boolean) extends Game{
     println()
     val guessOption = codeFactory.processGuess(input)
     guessOption match {
-        //TODO: Check whether the boolean flag is necessary
-      case None => guessLoop(guessesAndResponses, code, true)
+      case None => guessLoop(guessesAndResponses, code)
       case _ => val guess = guessOption.get
         val responseHandler: ResponseHandler = wire[ResponseHandler]
         val response: Response = responseHandler.getResponse(guess)
-        //TODO: Check the response is not the appropriate number of blacks
         if(showCode) println(s"${code.toString} Secret Code")
         else println(".... Secret Code")
-        val zipped: Vector[(Guess, Response)] = (Vector[Guess](guess).zip(Vector[Response](response)))
+        val zipped: Vector[(Guess, Response)] = Vector[Guess](guess).zip(Vector[Response](response))
         val newGuesses: Vector[(Guess, Response)] = guessesAndResponses ++ zipped
         newGuesses.foreach(g => println(g._1.toString + " Result: " + g._2.toString))
         val remainingGuesses = NUMBER_OF_GUESSES - newGuesses.length
         for (i <- 0 until remainingGuesses) {
           println("....")
         }
-        //TODO: Complete the guessloop, passing the new guess/response vector and the code in
+        if(response.pegs.count(p => p.isInstanceOf[Black]) == CODE_LENGTH) {
+          println("\n\n\nYou solved the puzzle! Good job!")
+        } else {
+          remainingGuesses match {
+            case 0 => println("\n\n\nYou have run out of guesses. You lose!")
+            case _ => guessLoop(newGuesses, code)
+          }
+        }
+
     }
 
   }
