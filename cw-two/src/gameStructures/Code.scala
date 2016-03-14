@@ -1,4 +1,4 @@
-package game
+package gameStructures
 
 import pegs.Colour
 

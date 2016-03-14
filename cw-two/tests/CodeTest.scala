@@ -1,4 +1,5 @@
-import game.{SecretCode, Guess, Code}
+
+import gameStructures.{SecretCode, Guess}
 import handlers.ColourFactory
 import org.scalatest.FunSuite
 

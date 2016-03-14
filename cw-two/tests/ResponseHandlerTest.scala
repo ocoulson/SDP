@@ -2,8 +2,8 @@
   * Created by Oliver Coulson on 11/03/2016.
   */
 
-import game.{Guess, SecretCode, Response}
 import com.softwaremill.macwire._
+import gameStructures.{Response, SecretCode, Guess}
 import handlers.{ResponseFactory, ResponseHandler, ColourFactory}
 import org.scalatest.FunSuite
 import pegs.{White, Black}

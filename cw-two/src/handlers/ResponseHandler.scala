@@ -1,6 +1,6 @@
 package handlers
 
-import game.{Response, Code, Guess, SecretCode}
+import gameStructures.{Response, SecretCode, Guess}
 import pegs.{ResponsePeg, White, Black}
 import com.softwaremill.macwire._
 

@@ -1,6 +1,6 @@
 package handlers
 import com.softwaremill.macwire._
-import game.{SecretCode, Guess}
+import gameStructures.{SecretCode, Guess}
 import pegs.Colour
 
 
@@ -14,6 +14,7 @@ import pegs.Colour
 class CodeFactory(val pegNo: Int) {
   /**
     * Generates the secret code each run of the game.
+ *
     * @return a SecretCode object of length 'pegNo'
     */
   def generateSecretCode: SecretCode = {
