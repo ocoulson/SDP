@@ -40,10 +40,6 @@ class GameStatus(showCode: Boolean) extends Game{
             "\n\n" +
             s"You have $NUMBER_OF_GUESSES attempts to guess the answer or you lose the game")
 
-    gameLoop()
-  }
-
-  def gameLoop(): Unit = {
     println("Generating secret code...")
     val secretCode: SecretCode = codeFactory.generateSecretCode
     if (showCode) {
@@ -55,7 +51,7 @@ class GameStatus(showCode: Boolean) extends Game{
     print(":>")
     val input = StdIn.readLine().toUpperCase
     input match {
-      case "Y" => gameLoop()
+      case "Y" => runGames
       case _ => System.exit(0)
     }
   }

@@ -6,7 +6,7 @@ package game
 object MastermindDriver {
   def main(args: Array[String]) {
     //Input argument 'true' for easy, 'false' for hard
-    val g: Game = Factory.getInstance(false)
+    val g: Game = Factory.getInstance(true)
     g.runGames
   }
 }
