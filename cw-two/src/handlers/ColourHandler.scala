@@ -34,7 +34,6 @@ class ColourHandler {
 
 object ColourFactory {
   val colourHandler = wire[ColourHandler]
-  var ids = List[String]()
   def newColour(name: Char): Option[Colour] = {
 
       if(colourHandler.rawNames.map(_.charAt(0).toUpper).contains(name)) {
