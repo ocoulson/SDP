@@ -15,7 +15,7 @@ import scala.util.Random
   */
 
 class ColourHandler {
-  private val pathString = ".." + File.separator + "SDP"
+  private val pathString = "."
   private val path = List(pathString).map(new File(_))
   private val finder = ClassFinder(path)
   private val classes = finder.getClasses().toIterator

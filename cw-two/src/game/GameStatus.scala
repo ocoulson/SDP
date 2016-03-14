@@ -6,17 +6,18 @@ import pegs.Black
 import scala.io.StdIn
 
 /**
+  * An implementation of the Game trait. Contains constants representing the game's parameters
+  * i.e. the length of the secret code and the number of guesses the player has.
+  * It also holds references to the necessary
   * Created by Oliver Coulson and George Shiangoli on 11/03/2016.
   */
 class GameStatus(showCode: Boolean) extends Game{
-  private val CODE_LENGTH: Int = 4
-  private val NUMBER_OF_GUESSES = 12
+  private val PARAMETERS: GameParameters = wire[GameParameters]
+  private val CODE_LENGTH: Int = PARAMETERS.codeLength
+
+  private val colourHandler: ColourHandler = wire[ColourHandler]
+  private val codeFactory: CodeFactory = wire[CodeFactory]
   private val EMPTY_GUESS_RESPONSE_VECTOR = Vector[Guess]().zip(Vector[Response]())
-
-  private val colourHandler = wire[ColourHandler]
-  private val codeFactory = new CodeFactory(CODE_LENGTH)
-  private val colourNumber = colourHandler.rawNames.length
-
   /**
     * Run one or more games of mastermind, until the player
     * quits.
@@ -26,7 +27,7 @@ class GameStatus(showCode: Boolean) extends Game{
             "This is a text version of the classic board game Mastermind.\n" +
             "The computer will think of a secret code.\n" +
             s"The code consists of $CODE_LENGTH colored pegs.\n" +
-            s"The pegs may be one of $colourNumber colors: ${colourHandler.toString()}.\n" +
+            s"The pegs may be one of ${colourHandler.rawNames.length} colors: ${colourHandler.toString()}.\n" +
             "A color may appear more than once in the code." +
             "\n\n" +
             "You try to guess what colored pegs are in the code and what order they are in\n" +
@@ -38,7 +39,7 @@ class GameStatus(showCode: Boolean) extends Game{
             "Only the first letter of the color is displayed. B for Blue, R for Red, and so forth.\n" +
             "When entering guesses you only need to enter the first character of the color as a capital letter." +
             "\n\n" +
-            s"You have $NUMBER_OF_GUESSES attempts to guess the answer or you lose the game")
+            s"You have ${PARAMETERS.numberOfGuesses} attempts to guess the answer or you lose the game")
 
     println("Generating secret code...")
     val secretCode: SecretCode = codeFactory.generateSecretCode
@@ -57,7 +58,7 @@ class GameStatus(showCode: Boolean) extends Game{
   }
 
   def guessLoop(guessesAndResponses: Vector[(Guess, Response)], code: SecretCode): Unit = {
-    println(s"You have ${NUMBER_OF_GUESSES - guessesAndResponses.length} guesses left\n")
+    println(s"You have ${PARAMETERS.numberOfGuesses - guessesAndResponses.length} guesses left\n")
     println("What is your next guess?\nType in the characters for your guess and press Enter.")
     print("Enter guess: ")
 
@@ -88,7 +89,7 @@ class GameStatus(showCode: Boolean) extends Game{
           newGuesses.foreach(g => println(g._1.toString + " Result: " + g._2.toString))
 
           //Print the appropriate number of remaining guess spots
-          val remainingGuesses = NUMBER_OF_GUESSES - newGuesses.length
+          val remainingGuesses = PARAMETERS.numberOfGuesses - newGuesses.length
           for (i <- 0 until remainingGuesses) {
             println("....")
           }
