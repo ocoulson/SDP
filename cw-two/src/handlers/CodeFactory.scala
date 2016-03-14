@@ -1,8 +1,8 @@
 package handlers
+
 import com.softwaremill.macwire._
 import gameStructures.{SecretCode, Guess}
 import pegs.Colour
-
 
 /**
   * CodeFactory uses the factory pattern, returns either a randomly generated SecretCode or a Guess
@@ -12,9 +12,10 @@ import pegs.Colour
   * Created by Oliver Coulson and George Shiangoli on 10/03/2016.
   */
 class CodeFactory(val pegNo: Int) {
+
   /**
     * Generates the secret code each run of the game.
- *
+    *
     * @return a SecretCode object of length 'pegNo'
     */
   def generateSecretCode: SecretCode = {

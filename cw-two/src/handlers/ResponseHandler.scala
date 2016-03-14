@@ -3,7 +3,6 @@ package handlers
 import gameStructures.{Response, SecretCode, Guess}
 import pegs.{ResponsePeg, White, Black}
 import com.softwaremill.macwire._
-
 import scala.util.Random
 
 /**

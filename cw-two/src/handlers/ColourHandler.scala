@@ -4,7 +4,6 @@ import java.io.File
 import org.clapper.classutil.ClassFinder
 import com.softwaremill.macwire._
 import pegs._
-
 import scala.util.Random
 
 /**
