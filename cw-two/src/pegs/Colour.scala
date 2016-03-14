@@ -21,22 +21,22 @@ trait Colour {
   }
 }
 
-final class Red(id: String) extends Colour {
+final class Red extends Colour {
   override val symbol: Char = 'R'
 }
-final class Orange(id: String) extends Colour {
+final class Orange extends Colour {
   override val symbol: Char = 'O'
 }
-final class Purple(id: String) extends Colour {
+final class Purple extends Colour {
   override val symbol: Char = 'P'
 }
-final class Green(id: String) extends Colour {
+final class Green extends Colour {
   override val symbol: Char = 'G'
 }
-final class Yellow(id: String) extends Colour {
+final class Yellow extends Colour {
   override val symbol: Char = 'Y'
 }
-final class Blue(id: String) extends Colour {
+final class Blue extends Colour {
   override val symbol: Char = 'B'
 }
 

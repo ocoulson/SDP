@@ -8,7 +8,6 @@ package pegs
   * Created by Oliver Coulson and George Shiangoli on 07/03/2016.
   */
 sealed trait ResponsePeg {
-
   val name: String
 }
 

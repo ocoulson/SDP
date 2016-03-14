@@ -24,7 +24,7 @@ class ColourHandler {
   val instanceNames: List[String] = subclasses.map(i => i.name).toList
   val rawNames = instanceNames.map(i => i.substring(i.indexOf(".")+1))
 
-  override def toString(): String = {
+  override def toString: String = {
     val rawString = rawNames.toString()
     rawString.substring(rawString.indexOf('(')+1, rawString.indexOf(')'))
   }
@@ -33,7 +33,6 @@ class ColourHandler {
 
 
 object ColourFactory {
-  //TODO: issue of playing mutliple games, should this be a class/not have the ids or wipe ids on game restart
   val colourHandler = wire[ColourHandler]
   var ids = List[String]()
   def newColour(name: Char): Option[Colour] = {
@@ -41,19 +40,9 @@ object ColourFactory {
       if(colourHandler.rawNames.map(_.charAt(0).toUpper).contains(name)) {
         val instanceClass = Class.forName(colourHandler.instanceNames.find(i => i.contains(name)).get)
         val instanceConstructor = instanceClass.getConstructors()(0)
-        val id: String = generateId(name)
-        val instance = Some(instanceConstructor.newInstance(id).asInstanceOf[Colour])
+        val instance = Some(instanceConstructor.newInstance().asInstanceOf[Colour])
         instance
       } else None
-  }
-  def generateId(name:Char) : String = {
-
-    val suffix = ids.size
-    val id: String = name.toString + suffix.toString
-
-    ids = id :: ids
-
-    id
   }
 
   def generateRandomColour(): Option[Colour] = {
