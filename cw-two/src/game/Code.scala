@@ -4,14 +4,14 @@ import pegs.Colour
 import com.softwaremill.macwire._
 
 /**
-  * Created by Oliver Coulson on 10/03/2016.
+  * Code is a
+  *
+  * Created by Oliver Coulson and George Shiangoli on 10/03/2016.
   */
-sealed trait Code {
-  def length: Int = ???
-}
 
-abstract class AbstractCode(val code: Vector[Colour]) extends Code {
-  override def length = code.length
+sealed abstract class Code(val code: Vector[Colour]) {
+  def length = code.length
+
   override def toString: String = {
     val builder = new StringBuilder
     val rawString = code.map(c => c.symbol).toString()
@@ -19,28 +19,24 @@ abstract class AbstractCode(val code: Vector[Colour]) extends Code {
     substring.foreach(c => if(c != ',' && c != ' ') builder.append(c))
     builder.toString()
   }
-}
 
-final class Guess(code: Vector[Colour]) extends AbstractCode(code)
-
-final class SecretCode(code: Vector[Colour]) extends AbstractCode(code)
-
-object Code {
-  def isGuessCorrect(code1: Guess, code2: SecretCode): Boolean = {
-    if(code1.length != code2.length) false
+  override def equals(other: Any): Boolean = {
+    if (!other.isInstanceOf[Code]) false
     else {
-        val zipped = code1.code.zip(code2.code)
+      val otherCode = other.asInstanceOf[Code]
+      if(this.length != code.length) false
+      else {
+        val zipped = this.code.zip(otherCode.code)
         for(i <- zipped.indices) {
           if(zipped(i)._1.symbol != zipped(i)._2.symbol) return false
         }
         true
+      }
     }
   }
-  def isSameGuess(code1: Guess, code2: Guess): Boolean = {
-    val guess2Vector = code2.code
-    //Method isGuessCorrect uses SecretCode, so new guess converted to SecretCode to avoid duplication.
-    val secretCode = wire[SecretCode]
-    isGuessCorrect(code1, secretCode)
-  }
 }
+
+final class Guess(code: Vector[Colour]) extends Code(code)
+
+final class SecretCode(code: Vector[Colour]) extends Code(code)
 

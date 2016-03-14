@@ -73,40 +73,42 @@ class GameStatus(showCode: Boolean) extends Game{
         if(!uniqueGuessCheck) {
           println("You've already made that guess")
           guessLoop(guessesAndResponses, code)
-        }
-
-        //This generates the response from the guess
-        val responseHandler: ResponseHandler = wire[ResponseHandler]
-        val response: Response = responseHandler.getResponse(guess)
-
-        if(showCode) println(s"${code.toString} Secret Code")
-        else println(".... Secret Code")
-
-        //Add the new guess and response to the original vector, and print all made guesses and responses
-        val zipped: Vector[(Guess, Response)] = Vector[Guess](guess).zip(Vector[Response](response))
-        val newGuesses: Vector[(Guess, Response)] = guessesAndResponses ++ zipped
-        newGuesses.foreach(g => println(g._1.toString + " Result: " + g._2.toString))
-
-        //Print the appropriate number of remaining guess spots
-        val remainingGuesses = NUMBER_OF_GUESSES - newGuesses.length
-        for (i <- 0 until remainingGuesses) {
-          println("....")
-        }
-        //Check for exit conditions, win and lose
-        if(response.pegs.count(p => p.isInstanceOf[Black]) == CODE_LENGTH) {
-          println("\n\n\nYou solved the puzzle! Good job!")
         } else {
-          remainingGuesses match {
-            case 0 => println("\n\n\nYou have run out of guesses. You lose!")
-            case _ => guessLoop(newGuesses, code)
+
+          //This generates the response from the guess
+          val responseHandler: ResponseHandler = wire[ResponseHandler]
+          val response: Response = responseHandler.getResponse(guess)
+
+          if(showCode) println(s"${code.toString} Secret Code")
+          else println(".... Secret Code")
+
+          //Add the new guess and response to the original vector, and print all made guesses and responses
+          val zipped: Vector[(Guess, Response)] = Vector[Guess](guess).zip(Vector[Response](response))
+          val newGuesses: Vector[(Guess, Response)] = guessesAndResponses ++ zipped
+          newGuesses.foreach(g => println(g._1.toString + " Result: " + g._2.toString))
+
+          //Print the appropriate number of remaining guess spots
+          val remainingGuesses = NUMBER_OF_GUESSES - newGuesses.length
+          for (i <- 0 until remainingGuesses) {
+            println("....")
+          }
+          //Check for exit conditions, win and lose
+          if(response.pegs.count(p => p.isInstanceOf[Black]) == CODE_LENGTH) {
+            println("\n\n\nYou solved the puzzle! Good job!")
+          } else {
+            remainingGuesses match {
+              case 0 => println("\n\n\nYou have run out of guesses. You lose!")
+              case _ => guessLoop(newGuesses, code)
+            }
           }
         }
+
 
     }
 
   }
   private def checkUniqueGuess(guess: Guess, guessesAndResponses: Vector[(Guess, Response)]): Boolean = {
-    guessesAndResponses.foreach(tuple => if(Code.isSameGuess(tuple._1, guess)) return false)
+    guessesAndResponses.foreach(tuple => if(guess.equals(tuple._1)) return false)
     true
   }
 }

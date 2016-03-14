@@ -12,7 +12,7 @@ import scala.util.Random
 class ResponseHandler(secretCode: SecretCode) {
 
   def getResponse(guess: Guess): Response = {
-    if(Code.isGuessCorrect(guess, secretCode)) {
+    if(guess.equals(secretCode)) {
       getResponseInstance(guess.code.map(c => ResponseFactory.getResponsePeg(true)))
     }
     else {

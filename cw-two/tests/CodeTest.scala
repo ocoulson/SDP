@@ -22,7 +22,7 @@ class CodeTest extends FunSuite {
     val secretCodeVector = Vector(colour5, colour6, colour7, colour8)
     val secretCode = new SecretCode(secretCodeVector)
 
-    assert(Code.isGuessCorrect(guess, secretCode))
+    assert(guess.equals(secretCode))
   }
 
   test("A guess that does not match the secret code returns false") {
@@ -40,7 +40,7 @@ class CodeTest extends FunSuite {
     val secretCodeVector = Vector(colour5, colour6, colour7, colour8)
     val secretCode = new SecretCode(secretCodeVector)
 
-    assert(!Code.isGuessCorrect(guess, secretCode))
+    assert(!guess.equals(secretCode))
   }
 
   test("A guess that is not the same length as the secret code returns false") {
@@ -57,7 +57,7 @@ class CodeTest extends FunSuite {
     val secretCodeVector = Vector(colour5, colour6, colour7, colour8)
     val secretCode = new SecretCode(secretCodeVector)
 
-    assert(!Code.isGuessCorrect(guess, secretCode))
+    assert(!guess.equals(secretCode))
   }
 
   test("Two identical guesses returns true from method isSameGuess") {
@@ -75,7 +75,7 @@ class CodeTest extends FunSuite {
     val guess2Vector = Vector(colour5, colour6, colour7, colour8)
     val guess2 = new Guess(guess2Vector)
 
-    assert(Code.isSameGuess(guess, guess2))
+    assert(guess.equals(guess2))
 
   }
 
@@ -94,7 +94,7 @@ class CodeTest extends FunSuite {
     val guess2Vector = Vector(colour5, colour6, colour7, colour8)
     val guess2 = new Guess(guess2Vector)
 
-    assert(!Code.isSameGuess(guess, guess2))
+    assert(!guess.equals(guess2))
 
   }
 
