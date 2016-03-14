@@ -1,7 +1,6 @@
 package game
 
 import pegs.Colour
-import com.softwaremill.macwire._
 
 /**
   * Code is an abstract class that represents either a Guess or SecretCode.
