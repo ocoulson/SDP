@@ -1,6 +1,6 @@
 package game
 
-import java.io.{File, FileInputStream}
+import java.io.{IOException, File, FileInputStream}
 import java.util.Properties
 import com.softwaremill.macwire._
 
@@ -21,12 +21,22 @@ final class GameParameters {
 
   /**
     * Returns a Vector of the parameters taken from the game.properties file
+    *
     * @return the Vector of Ints containing codeLength and numberOfGuesses
     */
   def parameters: Vector[Int] = {
-    properties.load(wire[FileInputStream])
-    val length = properties.getProperty("codeLength").toInt
-    val guesses = properties.getProperty("numberOfGuesses").toInt
-    Vector(length, guesses)
+    try {
+      val fileInputStream = wire[FileInputStream]
+      properties.load(fileInputStream)
+      val length = properties.getProperty("codeLength").toInt
+      val guesses = properties.getProperty("numberOfGuesses").toInt
+      fileInputStream.close()
+      Vector(length, guesses)
+
+    } catch {
+      case iox: IOException => iox.printStackTrace()
+        Vector()
+    }
+
   }
 }
