@@ -12,10 +12,10 @@ class GameStatus(showCode: Boolean) extends Game{
   private val CODE_LENGTH: Int = 4
   private val NUMBER_OF_GUESSES = 12
   private val EMPTY_GUESS_RESPONSE_VECTOR = Vector[Guess]().zip(Vector[Response]())
+
   private val colourHandler = wire[ColourHandler]
   private val codeFactory = new CodeFactory(CODE_LENGTH)
   private val colourNumber = colourHandler.rawNames.length
-
 
   /**
     * Run one or more games of mastermind, until the player
@@ -67,10 +67,19 @@ class GameStatus(showCode: Boolean) extends Game{
     guessOption match {
       case None => guessLoop(guessesAndResponses, code)
       case _ => val guess = guessOption.get
+        val uniqueGuessCheck: Boolean = checkUniqueGuess(guess, guessesAndResponses)
+        if(!uniqueGuessCheck) {
+          println("You've already made that guess")
+          guessLoop(guessesAndResponses, code)
+        }
+
+
         val responseHandler: ResponseHandler = wire[ResponseHandler]
         val response: Response = responseHandler.getResponse(guess)
+
         if(showCode) println(s"${code.toString} Secret Code")
         else println(".... Secret Code")
+
         val zipped: Vector[(Guess, Response)] = Vector[Guess](guess).zip(Vector[Response](response))
         val newGuesses: Vector[(Guess, Response)] = guessesAndResponses ++ zipped
         newGuesses.foreach(g => println(g._1.toString + " Result: " + g._2.toString))
@@ -89,6 +98,10 @@ class GameStatus(showCode: Boolean) extends Game{
 
     }
 
+  }
+  private def checkUniqueGuess(guess: Guess, guessesAndResponses: Vector[(Guess, Response)]): Boolean = {
+    guessesAndResponses.foreach(tuple => if(Code.isSameGuess(tuple._1, guess)) return false)
+    true
   }
 }
 
