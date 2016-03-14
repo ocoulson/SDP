@@ -5,10 +5,8 @@ package game
   */
 object MastermindDriver {
   def main(args: Array[String]) {
-    //TODO: Get user input for easy/hard
-    var g: Game = Factory.getInstance(classOf[Game], true)
+    //Input argument 'true' for easy, 'false' for hard
+    val g: Game = Factory.getInstance(false)
     g.runGames
-//    g = Factory.getInstance(classOf[Game], false)
-//    g.runGames
   }
 }
