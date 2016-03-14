@@ -5,6 +5,9 @@ import java.util.Properties
 import com.softwaremill.macwire._
 
 /**
+  * A class to hold the two parameters of the game, the length of the code and the number of guesses
+  * the player has. These are actually stored in a configuration file called 'game.parameters'
+  *
   * Created by Oliver Coulson and George Shiangoli on 14/03/2016.
   */
 final class GameParameters {
@@ -16,6 +19,10 @@ final class GameParameters {
                     "src" + File.separator +
                     "game.properties"
 
+  /**
+    * Returns a Vector of the parameters taken from the game.properties file
+    * @return the Vector of Ints containing codeLength and numberOfGuesses
+    */
   def parameters: Vector[Int] = {
     properties.load(wire[FileInputStream])
     val length = properties.getProperty("codeLength").toInt
