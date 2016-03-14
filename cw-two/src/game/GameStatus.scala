@@ -63,30 +63,36 @@ class GameStatus(showCode: Boolean) extends Game{
 
     val input = StdIn.readLine()
     println()
+    //Get a guess wrapped in an option based on the input, it will be empty if input is invalid
     val guessOption = codeFactory.processGuess(input)
     guessOption match {
       case None => guessLoop(guessesAndResponses, code)
       case _ => val guess = guessOption.get
+        //Even if input is valid, guess may have been made before
         val uniqueGuessCheck: Boolean = checkUniqueGuess(guess, guessesAndResponses)
         if(!uniqueGuessCheck) {
           println("You've already made that guess")
           guessLoop(guessesAndResponses, code)
         }
 
-
+        //This generates the response from the guess
         val responseHandler: ResponseHandler = wire[ResponseHandler]
         val response: Response = responseHandler.getResponse(guess)
 
         if(showCode) println(s"${code.toString} Secret Code")
         else println(".... Secret Code")
 
+        //Add the new guess and response to the original vector, and print all made guesses and responses
         val zipped: Vector[(Guess, Response)] = Vector[Guess](guess).zip(Vector[Response](response))
         val newGuesses: Vector[(Guess, Response)] = guessesAndResponses ++ zipped
         newGuesses.foreach(g => println(g._1.toString + " Result: " + g._2.toString))
+
+        //Print the appropriate number of remaining guess spots
         val remainingGuesses = NUMBER_OF_GUESSES - newGuesses.length
         for (i <- 0 until remainingGuesses) {
           println("....")
         }
+        //Check for exit conditions, win and lose
         if(response.pegs.count(p => p.isInstanceOf[Black]) == CODE_LENGTH) {
           println("\n\n\nYou solved the puzzle! Good job!")
         } else {
