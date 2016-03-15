@@ -1,0 +1,59 @@
+ Design Patterns 2
+
+1.
+   (a) Briefly describe the Strategy Design Pattern?
+   The Strategy DP allows you to encapsulate methods in a family of classes, so that the parent class doesn't hold
+   the method so that all subclasses have the method whether they need it or not. Instead the parent class has an
+   instance of an interface whose various implementations have different implementations of the code which each
+   subclass can choose.
+
+   (b) When is it appropriate to use the Strategy Design Pattern?
+   With a heirarchy of inheritence when some but not all subclasses need to share a particular implementation of some
+   functionality, and others may want a different implementation of the functionality.
+   To avoid repetition it would want to be in the parent, but that would result in some unneccessary code in some
+   subclasses, or the need to override in many subclasses.
+
+2. See package StrategyPattern
+
+3. When is it appropriate to use the Abstract Factory Pattern?
+
+   An Abstract Factory is basically an abstract superclass for a variety of different factories, all creating the same
+   type of object, but in a different way. It decouples the client application from the specific concrete products being
+   created. It allows you to change the concrete implementations of objects in code without changing the code that uses
+   them.
+   This might allow flexibility of code if later changes want to change implementations of objects. Also if different
+   parts of the code want to use different versions of the same type of object. For example buttons on a GUI, different
+   parts of the code might want to use different looking buttons, but performing the same functions.
+
+4. See package AbstractFactoryPattern
+
+5. “In general, the details of object construction, such as instantiating and initialising the components that comprise
+    the object, are kept within the object, often as part of its constructor.”
+   Comment on this statement with reference to 'modularity' and 'construction bloat'.
+
+    If you have a large object containing a series of other objects, i.e. a composition relationship, if you had to
+    initialise and instantiate all those parts in the constructor of the main object, the constructor of that main
+    object would end up being potentially huge and require a lot of parameters, specifying what all those interior
+    objects are. Furthermore, that constructor would have to instantiate these components making the class dependent on
+    all the component classes. Using various design patterns, notably the Builder pattern, you can remove this
+    construction bloat and make the main class not dependent on specific concrete classes for its components, instead
+    a builder object has these dependencies and puts the main object together.
+
+6. See package BuilderPattern
+
+7a) What is the Facade pattern?
+
+    It is basically a way of making a series of complex behind-the-scenes operations seem to be more simple user
+    friendly operations. For example when a seemingly simple action, like withdrawing cash from an ATM, requires a lot
+    of checks, like checking account status, account balance, pin code, withdrawal limit are all done behind a simple
+    method like withdraw(200).
+
+b) When, and why, would you use the Facade Pattern?
+
+    As often as possible when making user interfaces to hide the complexities of the system and allow the user to use
+    easily and effectively. You can also use it to pull several poorly done APIs together into one well designed and
+    easy to read API or to help prevent dependencies between outside code and code within the library behind the facade.
+
+8. See package FacadePattern.
+
+9. When should one make use of the Bridge Design Pattern?
